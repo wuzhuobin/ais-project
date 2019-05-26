@@ -3,17 +3,17 @@ import React from 'react';
 import { PageHeader } from 'antd';
 import { Button } from 'antd';
 import { Tabs } from 'antd';
+// import { Layout } from 'antd';
+import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import CornerstoneViewport from 'react-cornerstone-viewport';
-import Cornerstone from 'cornerstone-core';
-import CornerstoneTools from 'cornerstone-tools';
 // me
 import ReportPane from './ReportPane';
 import BrainnowIcon from './asset/brainnow-icon.svg';
 import './AisOnlineViewer.css';
-import './initCornerstone';
+import CornerstoneImageViewer from './CornerstoneImageViewer';
 
 const TabPlane = Tabs.TabPane;
+// const { Header, Footer, Sider, Content} = Layout;
 
 class PatientInfo extends React.Component {
   render() {
@@ -71,28 +71,31 @@ LanguageButton.enText = "English/英文";
 class TabViewers extends React.Component {
 
   render() {
-    const exampleData = {
-      stack: {
-        currentImageIdIndex: 0,
-        imageIds: [
-          "dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032220.11.dcm",
-          "dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032220.12.dcm"
-        ],
-      }
-    };
     return (
       <Tabs defaultActiveKey="Report">
         <TabPlane tab="Report" key="Report">
           <ReportPane></ReportPane>
         </TabPlane>
         <TabPlane tab="ASPECT" key="ASPECT">
-          <div style={{height: '80vh'}}>
-          <CornerstoneViewport
-            viewportData={exampleData}
-            cornerstone={Cornerstone}
-            cornerstoneTools={CornerstoneTools}
-            >
-          </CornerstoneViewport></div>
+          <Row>
+            <Col span={8}>
+              <CornerstoneImageViewer></CornerstoneImageViewer>
+            </Col>
+            <Col span={8}>
+              <CornerstoneImageViewer></CornerstoneImageViewer>
+            </Col>
+            <Col span={8}></Col>
+          </Row>
+          <Row>
+            <Col span={4}></Col>
+            <Col span={4}></Col>
+            <Col span={4}>
+              <Button>WindowLevel</Button>
+            </Col>
+            <Col span={4}></Col>
+            <Col span={4}></Col>
+            <Col span={4}></Col>
+          </Row>
         </TabPlane>
         <TabPlane tab="CTA" key="CTA"></TabPlane>
         <TabPlane tab="Mismatch" key="Mismatch"></TabPlane>
