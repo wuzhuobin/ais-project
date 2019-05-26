@@ -86,13 +86,13 @@ class TabViewers extends React.Component {
           <ReportPane></ReportPane>
         </TabPlane>
         <TabPlane tab="ASPECT" key="ASPECT">
+          <div style={{height: '80vh'}}>
           <CornerstoneViewport
             viewportData={exampleData}
             cornerstone={Cornerstone}
             cornerstoneTools={CornerstoneTools}
-            style={{height:'512px'}}
             >
-          </CornerstoneViewport>
+          </CornerstoneViewport></div>
         </TabPlane>
         <TabPlane tab="CTA" key="CTA"></TabPlane>
         <TabPlane tab="Mismatch" key="Mismatch"></TabPlane>
