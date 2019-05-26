@@ -3,7 +3,7 @@ import React from 'react';
 import { PageHeader } from 'antd';
 import { Button } from 'antd';
 import { Tabs } from 'antd';
-// import { Layout } from 'antd';
+import { Layout } from 'antd';
 import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 // me
@@ -13,7 +13,7 @@ import './AisOnlineViewer.css';
 import CornerstoneImageViewer from './CornerstoneImageViewer';
 
 const TabPlane = Tabs.TabPane;
-// const { Header, Footer, Sider, Content} = Layout;
+const { Header, Footer, Sider, Content} = Layout;
 
 class PatientInfo extends React.Component {
   render() {
@@ -84,7 +84,20 @@ class TabViewers extends React.Component {
             <Col span={8}>
               <CornerstoneImageViewer></CornerstoneImageViewer>
             </Col>
-            <Col span={8}></Col>
+            <Col span={8}>
+              <Layout>
+                <Header><Button>HOUSE FIELD UNIT MEAN</Button></Header>
+                <Layout>
+                  <Content>
+                    <Row>
+                      <Col span={12}>Right</Col>
+                      <Col span={12}>Left</Col>
+                    </Row>
+                  </Content>
+                </Layout>
+                <Footer>Score: 7</Footer>
+              </Layout>
+            </Col>
           </Row>
           <Row>
             <Col span={4}></Col>

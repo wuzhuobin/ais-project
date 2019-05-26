@@ -21,7 +21,7 @@ function getImageIds() {
       );
     }
     else {
-      ret.push('dicomweb://' +
+      ret.push('wadouri://' +
         window.location.hostname + 
         ':' +
         window.location.port +
