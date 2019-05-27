@@ -1,3 +1,30 @@
+# Ais Project
+
+## Read Before Developing
+
+### Folder Sturcture
+* build: Production build output.
+* config: Project configuration, do not change.
+* public: Path where webpack-dev-server host.
+* script: npm script, do not change.
+* src: where source code place
+  * Only Some big webpage like report pane, ASPECT pane, CTA pane, mismatch pane
+    should be src/
+  * component: Some small React components.
+  * component/ais-cornentstone: cornerstone related components.
+  * router: react-router, TODO.
+  * asset: webpage asset/resources, like jpg, png, etc.
+* test: test related.
+
+### Rules.
+1. Class name should be start with AisXXXX, e.g. AisOnlineImageViewer.js
+2. When developing new features, developer should creat your own branch. 
+3. Doing merge should use merge request in gitlab which created by developer. 
+   Project owner should review in time and merge.
+4. Project owner should remove useless branches.
+
+
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +93,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+---
+# CHANGELOG
+
+May.27.2019: Update folder structure, update README.md
