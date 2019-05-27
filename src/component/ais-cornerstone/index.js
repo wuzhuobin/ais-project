@@ -5,7 +5,7 @@ import Cornerstone from 'cornerstone-core';
 import CornerstoneTools from 'cornerstone-tools';
 // me
 import './initCornerstone';
-import './CornerstoneImageViewer.css';
+import './AisCornerstoneImageViewer.css';
 
 function getImageIds() {
   const ret = [];
@@ -33,7 +33,7 @@ function getImageIds() {
   }
   return ret;
 }
-export default class CornerstoneViewer extends React.Component {
+export default class AisCornerstoneViewer extends React.Component {
   constructor(props) {
     super(props);
     this.exampleData = {

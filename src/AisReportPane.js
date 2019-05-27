@@ -2,7 +2,7 @@
 import React from 'react';
 // me
 import reportPDF from './asset/I am pdf en-us.pdf';
-import './ReportPane.css'
+import './AisReportPane.css'
 export default class ReportPane extends React.Component {
   render() {
     return (
