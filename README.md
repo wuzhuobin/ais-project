@@ -1,3 +1,25 @@
+# Ais Project
+
+## Read Before Developing
+
+### Folder Sturcture
+* build: Production build output.
+* config: Project configuration, do not change.
+* public: Path where webpack-dev-server host.
+* script: npm script, do not change.
+* src: where source code place
+  * Only Some big webpage like report pane, ASPECT pane, CTA pane, mismatch pane
+    should be src/
+  * component: Some small React components.
+  * component/ais-cornentstone: cornerstone related components.
+  * router: react-router, TODO.
+  * asset: webpage asset/resources, like jpg, png, etc.
+* test: test related.
+
+### Rules for Components.
+1. Class name should be start with AisXXXX, e.g. AisOnlineImageViewer.js
+
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
