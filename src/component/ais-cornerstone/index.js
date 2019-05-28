@@ -9,27 +9,19 @@ import './AisCornerstoneImageViewer.css';
 
 function getImageIds() {
   const ret = [];
-  for (let i = 1; i <=10; ++i) {
-    if (i < 10) {
-      ret.push('dicomweb://' +
-        window.location.hostname + 
-        ':' +
-        window.location.port +
-        '/Data/IMG-0003-0000' +
-        i.toString() + 
-        '.dcm'
-      );
-    }
-    else {
-      ret.push('wadouri://' +
-        window.location.hostname + 
-        ':' +
-        window.location.port +
-        '/Data/IMG-0003-000' +
-        i.toString() + 
-        '.dcm'
-      );
-    }
+  for (let i = 1; i <= 30; ++i) {
+    const index0 = (--i) < 10 ? '0' + i.toString() : i.toString();
+    const index1 = (++i) < 10 ? '0' + i.toString() : i.toString();
+    ret.push('wadouri://' +
+      window.location.hostname +
+      ':' +
+      window.location.port +
+      '/Data/000001_0000' +
+      index0 +
+      '_000201_0000' +
+      index1 +
+      '.dcm'
+    );
   }
   return ret;
 }

@@ -29,7 +29,6 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const postcssNormalize = require('postcss-normalize');
 
 // * * * * * * * * * * * * * * * * * * * * MODIFIED * * * * * * * * * * * * * * * * * * * *
-const WriteFilePlugin = require('write-file-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 // * * * * * * * * * * * * * * * * * * * * MODIFIED * * * * * * * * * * * * * * * * * * * *
 
