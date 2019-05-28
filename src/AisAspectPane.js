@@ -1,13 +1,11 @@
 // node_modules
 import React from 'react';
-import { Layout } from 'antd';
 import { Row, Col } from 'antd';
 import { Button } from 'antd';
 // me
 import './AisAspectPane.css';
 import AisCornerstoneImageViewer from './component/ais-cornerstone';
-
-const { Header, Footer, Sider, Content} = Layout;
+import AisHousefieldUnitMean from './component/AisHousefieldUnitMean';
 
 export default class AisAspectPane extends React.Component {
   render() {
@@ -21,18 +19,7 @@ export default class AisAspectPane extends React.Component {
             <AisCornerstoneImageViewer></AisCornerstoneImageViewer>
           </Col>
           <Col span={8}>
-            <Layout>
-              <Header><Button>HOUSE FIELD UNIT MEAN</Button></Header>
-              <Layout>
-                <Content>
-                  <Row>
-                    <Col span={12}>Right</Col>
-                    <Col span={12}>Left</Col>
-                  </Row>
-                </Content>
-              </Layout>
-              <Footer>Score: 7</Footer>
-            </Layout>
+            <AisHousefieldUnitMean></AisHousefieldUnitMean>
           </Col>
         </Row>
         <Row>

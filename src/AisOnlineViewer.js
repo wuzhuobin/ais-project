@@ -12,7 +12,7 @@ export default class AisOnlineViewer extends React.Component {
 
   render() {
     return (
-      <Tabs defaultActiveKey="Report">
+      <Tabs defaultActiveKey="ASPECT">
         <TabPlane tab="Report" key="Report">
           <AisReportPane></AisReportPane>
         </TabPlane>
