@@ -1,7 +1,7 @@
 // node_modules
 import React from 'react';
 import { Row, Col } from 'antd';
-import { Button } from 'antd';
+// import { Button } from 'antd';
 // me
 import './AisAspectPane.css';
 import AisCornerstoneImageViewer from './component/ais-cornerstone';
@@ -26,7 +26,7 @@ export default class AisAspectPane extends React.Component {
           <Col span={4}></Col>
           <Col span={4}></Col>
           <Col span={4}>
-            <Button>WindowLevel</Button>
+            {/* <Button>WindowLevel</Button> */}
           </Col>
           <Col span={4}></Col>
           <Col span={4}></Col>

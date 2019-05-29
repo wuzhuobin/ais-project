@@ -9,12 +9,12 @@ const ORIENTATION = {
   RIGHT: 1
 };
 
-export { ORIENTATION as ORIENTATION };
+export { ORIENTATION };
 
 export default class AisColorSelectionCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   render() {
     return (
       <Card title={<div className='Title'>{this.props.orientation === ORIENTATION.LEFT ? 'LEFT': 'RIGHT'}</div>}>
