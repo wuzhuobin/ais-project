@@ -1,3 +1,17 @@
 .AisOnlineViewer {
   background-color: white;
 }
+
+.AisOnlineViewer > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  background: rgb(51, 74, 132);
+  color: white;
+}
+
+.AisOnlineViewer > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+  background: rgb(30, 169, 221);
+}
+
+.AisOnlineViewer > .ant-tabs-card > .ant-tabs-bar {
+  margin: 0;
+  border-bottom: 0;
+}

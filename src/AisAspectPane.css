@@ -1,0 +1,3 @@
+.AisAspectPane.ant-row::before,.ant-row::after{
+  display: none;
+}

@@ -12,3 +12,120 @@
 .Footer {
   text-align: center;
 }
+
+.CLabel {
+  background-color: rgb(255, 255, 0);
+}
+
+.CAffected {
+  background-color: rgb(174, 173, 67);
+}
+
+.CUnAffected {
+  background-color: rgb(76, 79 ,36);
+}
+
+.ICLabel {
+  background-color: rgb(0, 255, 255);
+}
+
+.ICAffected {
+  background-color: rgb(38, 154, 100);
+}
+
+.LLabel {
+  background-color: rgb(255, 0, 255);
+}
+
+.LAffected {
+  background-color: rgb(45, 160, 178);
+}
+
+.LUnAffected {
+  background-color: rgb(27, 71, 80);
+}
+
+.ILabel {
+  background-color: rgb(0, 0, 255);
+}
+
+.IAffected {
+  background-color: rgb(31, 64, 180);
+}
+
+.IUnAffected {
+  background-color: rgb(20, 34, 81);
+}
+
+.M1Label {
+  background-color: rgb(255, 0, 0);
+}
+
+.M1Affected {
+  background-color: rgb(172, 37, 41);
+}
+
+.M1UnAffected {
+  background-color: rgb(76, 24, 28);
+}
+
+.M2Label {
+  background-color: rgb(255, 128, 0);
+}
+
+.M2Affected {
+  background-color: rgb(174, 106, 35);
+}
+
+.M2UnAffected {
+  background-color: rgb(74, 52, 28);
+}
+
+.M3Label {
+  background-color: rgb(128, 255, 128);
+}
+
+.M3Affected {
+  background-color: rgb(105, 159, 125);
+}
+
+.M3UnAffected {
+  background-color: rgb(50, 72, 60);
+}
+
+.M4Label {
+  background-color: rgb(0, 128, 0);
+}
+
+.M4Affected {
+  background-color: rgb(32, 129, 32);
+}
+
+.M4UnAffected {
+  background-color: rgb(21 ,63, 27);
+}
+
+.M5Label {
+  background-color: rgb(128, 0, 0);
+}
+
+.M5Affected {
+  background-color: rgb(140, 54, 63);
+}
+
+.M5UnAffected {
+  background-color: rgb(63, 31, 34);
+}
+
+.M6Label {
+  background-color: rgb(128, 128, 0);
+}
+
+.M6Affected{
+  background-color: rgb(116, 36, 123);
+}
+
+.M6UnAffected {
+  background-color: rgb(53, 23, 61);
+}
+

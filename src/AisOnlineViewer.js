@@ -10,7 +10,8 @@ export default class AisOnlineViewer extends React.Component {
 
   render() {
     return (
-      <Tabs className="AisOnlineViewer" type='card' defaultActiveKey="ASPECT">
+      <div className="AisOnlineViewer" >
+      <Tabs type='card' defaultActiveKey="ASPECT">
         <Tabs.TabPane tab="Report" key="Report">
           <AisReportPane></AisReportPane>
         </Tabs.TabPane>
@@ -20,6 +21,7 @@ export default class AisOnlineViewer extends React.Component {
         <Tabs.TabPane tab="CTA" key="CTA"></Tabs.TabPane>
         <Tabs.TabPane tab="Mismatch" key="Mismatch"></Tabs.TabPane>
       </Tabs>
+      </div>
     );
   }
 }

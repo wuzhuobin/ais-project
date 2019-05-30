@@ -10,7 +10,7 @@ import AisHousefieldUnitMean from './component/AisHousefieldUnitMean';
 export default class AisAspectPane extends React.Component {
   render() {
     return (
-      <div>
+      <div className="AisAspectPane">
         <Row>
           <Col span={8}>
             <AisCornerstoneImageViewer></AisCornerstoneImageViewer>
