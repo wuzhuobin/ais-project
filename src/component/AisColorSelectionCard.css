@@ -1,13 +1,25 @@
-/* .AisColorSelectionCard {
+.AisColorSelectionCard {
   text-align: center;
-} */
+}
+
+.Affected {
+  background-color: rgb(255,255,255);
+}
+
+.UnAffected {
+  background-color: rgb(158, 158, 158);
+}
+
 .Title {
   text-align: center;
 }
 
 .Colors {
   text-align: center;
+  margin: 3px;
+  color: rgb(245, 245, 245);
 }
+
 
 .Footer {
   text-align: center;
@@ -31,6 +43,10 @@
 
 .ICAffected {
   background-color: rgb(38, 154, 100);
+}
+
+.ICUnAffected {
+  background-color: rgb(21, 79, 80);
 }
 
 .LLabel {

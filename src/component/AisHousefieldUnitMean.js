@@ -17,10 +17,10 @@ export default class AisHousefieldUnitMean extends React.Component {
           <Layout.Content>
             <Row>
               <Col span={12}>
-                <AisColorSelectionCard orientation={ORIENTATION.LEFT}></AisColorSelectionCard>
+                <AisColorSelectionCard orientation={ORIENTATION.LEFT} affected={false}></AisColorSelectionCard>
               </Col>
               <Col span={12}>
-                <AisColorSelectionCard orientation={ORIENTATION.RIGHT}></AisColorSelectionCard>
+                <AisColorSelectionCard orientation={ORIENTATION.RIGHT} affected={true}></AisColorSelectionCard>
               </Col>
             </Row>
           </Layout.Content>
