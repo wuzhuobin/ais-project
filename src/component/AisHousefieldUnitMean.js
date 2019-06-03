@@ -3,7 +3,6 @@ import React from 'react';
 import { Layout } from 'antd';
 import { Slider } from 'antd';
 import { Row, Col } from 'antd';
-import { Button } from 'antd';
 // me
 import AisColorSelectionCard from './AisColorSelectionCard';
 import './AisHousefieldUnitMean.css';
@@ -37,7 +36,7 @@ export default class AisHousefieldUnitMean extends React.Component {
         </Layout>
         <Layout.Footer className="Footer">
           Score<br />{this.context.infoAis.ASPECT_Final_Score}
-            <Slider disabled={false} value={this.context.infoAis.ASPECT_Final_Score} max={10} min={0}></Slider>
+            <Slider disabled={false} value={Number.parseInt(this.context.infoAis.ASPECT_Final_Score)} max={10} min={0}></Slider>
         </Layout.Footer>
       </Layout>
     );
