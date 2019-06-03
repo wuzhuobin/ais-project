@@ -35,7 +35,8 @@ export default class AisHousefieldUnitMean extends React.Component {
           </Layout.Content>
         </Layout>
         <Layout.Footer className="Footer">
-          Score<br />{this.context.infoAis.ASPECT_Final_Score}
+          Score<br />{this.context.infoAis.ASPECT_Final_Score}<br/>
+          Confident Level
             <Slider disabled={false} value={Number.parseInt(this.context.infoAis.ASPECT_Final_Score)} max={10} min={0}></Slider>
         </Layout.Footer>
       </Layout>
