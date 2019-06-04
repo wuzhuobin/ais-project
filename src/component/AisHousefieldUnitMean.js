@@ -3,14 +3,16 @@ import React from 'react';
 import { Layout } from 'antd';
 import { Slider } from 'antd';
 import { Row, Col } from 'antd';
+import { withTranslation } from 'react-i18next';
 // me
 import AisColorSelectionCard from './AisColorSelectionCard';
 import './AisHousefieldUnitMean.css';
 import { ORIENTATION } from './AisColorSelectionCard';
 import AppContext from '../AppContext';
 
-export default class AisHousefieldUnitMean extends React.Component {
+class AisHousefieldUnitMean extends React.Component {
   render() {
+    const t = this.props.t;
     return (
       <Layout>
         <Layout.Header className="LayoutHeader">HOUSE FIELD UNIT MEAN</Layout.Header>
@@ -35,8 +37,8 @@ export default class AisHousefieldUnitMean extends React.Component {
           </Layout.Content>
         </Layout>
         <Layout.Footer className="Footer">
-          Score<br />{this.context.infoAis.ASPECT_Final_Score}<br/>
-          Confident Level
+          {t('Score')}<br />{this.context.infoAis.ASPECT_Final_Score}<br/>
+          {t('Confident Level')}
             <Slider disabled={false} value={Number.parseInt(this.context.infoAis.ASPECT_Final_Score)} max={10} min={0}></Slider>
         </Layout.Footer>
       </Layout>
@@ -45,3 +47,5 @@ export default class AisHousefieldUnitMean extends React.Component {
 }
 
 AisHousefieldUnitMean.contextType = AppContext;
+
+export default withTranslation()(AisHousefieldUnitMean)

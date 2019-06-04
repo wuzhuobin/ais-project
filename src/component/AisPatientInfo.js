@@ -1,27 +1,29 @@
 // node_modules
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 // me
 import './AisPatientInfo.css';
 import AppContex from '../AppContext';
 
-export default class AisPatientInfo extends React.Component {
+class AisPatientInfo extends React.Component {
   render() {
+    const t = this.props.t;
     return (
       <div className="AisPatientInfo">
         <table>
           <tbody>
             <tr>
-              <td>Patient ID:</td>
+              <td>{t('Patient ID')}:</td>
               <td>{this.context.infoAis.Patient_ID}</td>
-              <td>Gender:</td>
+              <td>{t('Gender')}:</td>
               <td>{this.context.infoAis.Patient_Gender}</td>
-              <td>Affected side:</td>
+              <td>{t('Affected side')}:</td>
               <td>{this.context.infoAis.Affected_Side}</td>
             </tr>
             <tr>
-              <td>Name:</td>
+              <td>{t('Name')}:</td>
               <td>{this.context.infoAis.Patient_Name}</td>
-              <td>Scan time:</td>
+              <td>{t('Scan time')}:</td>
               <td>{this.context.infoAis.Scan_Time}</td>
               <td></td>
               <td></td>
@@ -32,5 +34,5 @@ export default class AisPatientInfo extends React.Component {
     );
   }
 };
-
-AisPatientInfo.contextType = AppContex; 
+AisPatientInfo.contextType = AppContex;
+export default withTranslation()(AisPatientInfo);

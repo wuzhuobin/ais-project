@@ -1,6 +1,7 @@
 // node_modules
 import React from 'react';
 import 'antd/dist/antd.css';
+
 // me
 import './App.css';
 import AisPageHeader from './component/AisPageHeader';
@@ -9,11 +10,6 @@ import AisOnlineViewer from './AisOnlineViewer';
 import InfoAisSample from './info_ais_sample.json';
 import AppContext from './AppContext';
 
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-// };
 function App() {
   const testContext = {infoAis: InfoAisSample};
   return (

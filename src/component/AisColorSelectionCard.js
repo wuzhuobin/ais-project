@@ -1,6 +1,7 @@
 // node_modules
 import React from 'react';
 import { Card } from 'antd';
+import { withTranslation } from 'react-i18next';
 // me
 import './AisColorSelectionCard.css';
 import AppContext from '../AppContext';
@@ -12,15 +13,16 @@ const ORIENTATION = {
 
 export { ORIENTATION };
 
-export default class AisColorSelectionCard extends React.Component {
+class AisColorSelectionCard extends React.Component {
   // constructor(props) {
   //   super(props);
   // }
   render() {
+    const t = this.props.t;
     let means = ['Caudate', 'Insularribbon', 'InternalCapsule', 'LentiformNucleus', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6'];
     means = means.map(value => this.props.orientation === ORIENTATION.LEFT ? 'L_' + value : 'R_' + value);
     return (
-      <Card className={this.props.affected ? 'Affected' : 'UnAffected'} title={<div className='Title'>{this.props.orientation === ORIENTATION.LEFT ? 'LEFT': 'RIGHT'}</div>}>
+      <Card className={this.props.affected ? 'Affected' : 'UnAffected'} title={<div className='Title'>{this.props.orientation === ORIENTATION.LEFT ? t('LEFT'): t('RIGHT')}</div>}>
         <div className={['Colors', 'C' + (this.props.affected ? 'Affected' : 'UnAffected')].join(' ')}>C&nbsp;&nbsp;&nbsp;{this.context.infoAis.HU_Mean[means[0]]}</div>
         <div className={['Colors', 'IC' + (this.props.affected ? 'Affected' : 'UnAffected')].join(' ')}>IC&nbsp;&nbsp;&nbsp;{this.context.infoAis.HU_Mean[means[1]]}</div>
         <div className={['Colors', 'L' + (this.props.affected ? 'Affected' : 'UnAffected')].join(' ')}>L&nbsp;&nbsp;&nbsp;{this.context.infoAis.HU_Mean[means[2]]}</div>
@@ -41,4 +43,6 @@ AisColorSelectionCard.contextType = AppContext;
 AisColorSelectionCard.defaultProps = {
   orientation: ORIENTATION.LEFT,
   affected: true
-}
+};
+
+export default withTranslation()(AisColorSelectionCard);
