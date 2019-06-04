@@ -6,8 +6,42 @@ import { Button } from 'antd';
 // me
 import './AisAspectPane.css';
 import AisCornerstoneImageViewer from './component/ais-cornerstone';
+import CornerstoneElement from'./component/ais-cornerstone-viewport'
 
 const { Header, Footer, Sider, Content} = Layout;
+
+const imageId = "https://rawgit.com/cornerstonejs/cornerstoneWebImageLoader/master/examples/Renal_Cell_Carcinoma.jpg";
+
+const stack = {
+  imageIds: [imageId],
+  currentImageIdIndex: 0
+};
+
+const layer = [{
+                  imageId: 'nifti://' + window.location.hostname + ':' +
+                            window.location.port + '/NiftiData/image.nii.gz',
+                  options: {
+                             name: 'CT',
+                             opacity: 1,
+                             viewport:{ voi: {windowWidth:80, windowCenter:40}}
+                           }
+                },
+                {
+                  imageId: 'nifti://' + window.location.hostname + ':' +
+                            window.location.port +'/NiftiData/bet.nii.gz',
+                  options: {
+                             name: 'Label',
+                             opacity: 0.2,
+                             viewport: {
+                                  colormap: 'autumn',
+                                  voi: {
+                                      windowWidth: 0.1,
+                                      windowCenter: 0.5
+                                       }
+                                      }
+                            }
+                }];
+
 
 export default class AisAspectPane extends React.Component {
   render() {
@@ -15,10 +49,10 @@ export default class AisAspectPane extends React.Component {
       <div>
         <Row>
           <Col span={8}>
-            <AisCornerstoneImageViewer></AisCornerstoneImageViewer>
+
           </Col>
           <Col span={8}>
-            <AisCornerstoneImageViewer></AisCornerstoneImageViewer>
+            <CornerstoneElement stack={{...stack}} layers = {layer} />  
           </Col>
           <Col span={8}>
             <Layout>
@@ -49,3 +83,5 @@ export default class AisAspectPane extends React.Component {
     );
   }
 }
+
+//                     <AisCornerstoneImageViewer></AisCornerstoneImageViewer>   
