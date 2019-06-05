@@ -4,7 +4,7 @@
 	"Patient_Age" 				: "34",
 	"Patient_Gender" 			: "M",
 	"Scan_Time"		 			: "2019-5-14 11:32am",
-	"Affected_Side"		 		: "L",
+	"Affected_Side"		 		: "Left",
 	"ASPECT_Final_Score"		: "7",
 
 	"Loaded_Module":

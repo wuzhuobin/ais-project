@@ -15,21 +15,21 @@ class AisHousefieldUnitMean extends React.Component {
     const t = this.props.t;
     return (
       <Layout>
-        <Layout.Header className="LayoutHeader">HOUSE FIELD UNIT MEAN</Layout.Header>
+        <Layout.Header className="LayoutHeader">{t('HOUNSFIELD UNIT MEAN')}</Layout.Header>
         <Layout>
           <Layout.Content>
             <Row>
               <Col span={12}>
                 <AisColorSelectionCard
                   orientation={ORIENTATION.LEFT}
-                  affected={this.context.infoAis.Affected_Side === 'L' ? true : false}
+                  affected={this.context.infoAis.Affected_Side === 'Left' ? true : false}
                 >
                 </AisColorSelectionCard>
               </Col>
               <Col span={12}>
                 <AisColorSelectionCard
                   orientation={ORIENTATION.RIGHT}
-                  affected={this.context.infoAis.Affected_Side === 'L' ? false : true}
+                  affected={this.context.infoAis.Affected_Side === 'Left' ? false : true}
                 >
                 </AisColorSelectionCard>
               </Col>
@@ -37,9 +37,13 @@ class AisHousefieldUnitMean extends React.Component {
           </Layout.Content>
         </Layout>
         <Layout.Footer className="Footer">
-          {t('Score')}<br />{this.context.infoAis.ASPECT_Final_Score}<br/>
-          {t('Confident Level')}
-            <Slider disabled={false} value={Number.parseInt(this.context.infoAis.ASPECT_Final_Score)} max={10} min={0}></Slider>
+         <br/>
+         <br/>
+         <br/>
+         <h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.context.infoAis.ASPECT_Final_Score}</h2>
+         <br/>
+         <br/>
+         <br/>
         </Layout.Footer>
       </Layout>
     );
@@ -49,3 +53,10 @@ class AisHousefieldUnitMean extends React.Component {
 AisHousefieldUnitMean.contextType = AppContext;
 
 export default withTranslation()(AisHousefieldUnitMean)
+
+
+/*
+####Hide for later use 
+          <h2 className="ConfiendentLevel">{t('Confident Level')}</h2>
+            <Slider disabled={false} value={Number.parseInt(this.context.infoAis.ASPECT_Final_Score)} max={10} min={0}></Slider>
+*/

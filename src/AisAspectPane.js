@@ -12,13 +12,13 @@ export default class AisAspectPane extends React.Component {
     return (
       <div className="AisAspectPane">
         <Row>
-          <Col span={8}>
+          <Col span={9}>
             <AisCornerstoneImageViewer></AisCornerstoneImageViewer>
           </Col>
-          <Col span={8}>
+          <Col span={9}>
             <AisCornerstoneImageViewer></AisCornerstoneImageViewer>
           </Col>
-          <Col span={8}>
+          <Col span={6}>
             <AisHousefieldUnitMean></AisHousefieldUnitMean>
           </Col>
         </Row>

@@ -13,17 +13,17 @@ class AisPatientInfo extends React.Component {
         <table>
           <tbody>
             <tr>
-              <td>{t('Patient ID')}:</td>
+              <td><label className="l1">{t('Patient ID')}:</label></td>
               <td>{this.context.infoAis.Patient_ID}</td>
-              <td>{t('Gender')}:</td>
+              <td><label className="l2">{t('Gender')}:</label></td>
               <td>{this.context.infoAis.Patient_Gender}</td>
-              <td>{t('Affected side')}:</td>
+              <td><label className="l3">{t('Side of Acute Cerebrovascular Lesion')}:</label></td>
               <td>{this.context.infoAis.Affected_Side}</td>
             </tr>
             <tr>
-              <td>{t('Name')}:</td>
+              <td><label className="l4">{t('Name')}:</label></td>
               <td>{this.context.infoAis.Patient_Name}</td>
-              <td>{t('Scan time')}:</td>
+              <td><label className="l5">{t('Scan time')}:</label></td>
               <td>{this.context.infoAis.Scan_Time}</td>
               <td></td>
               <td></td>

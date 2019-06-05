@@ -1,12 +1,37 @@
 .AisPatientInfo {
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(245,245,245);
   padding-bottom: 20px;
 }
 
 .AisPatientInfo table {
-  width: 700px;
+  width: 800px;
 }
 
 .AisPatientInfo td {
   padding: 5px;
+}
+
+.l1 {
+	color: rgb(51, 74, 132);
+	font-weight: bold;
+}
+
+.l2 {
+	color: rgb(51, 74, 132);
+	font-weight: bold;
+}
+
+.l3 {
+	color: rgb(51, 74, 132);
+	font-weight: bold;
+}
+
+.l4 {
+	color: rgb(51, 74, 132);
+	font-weight: bold;
+}
+
+.l5 {
+	color: rgb(51, 74, 132);
+	font-weight: bold;
 }

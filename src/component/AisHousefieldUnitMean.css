@@ -1,4 +1,26 @@
 .LayoutHeader {
-  color: white;
+  background: rgb(250,250,250);
+  color: black;
   text-align: center;
+  font-weight: bold;
+
+  display: block;
+  font-size: 1.17em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.Footer {
+  background: rgb(250,250,250);
+}
+
+.ScoreLabel {
+  color: black;
+  font-weight: bold;
+}
+
+.ConfiendentLevel {
+  color: black;
+  font-weight: bold;
 }
