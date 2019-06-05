@@ -51,11 +51,11 @@ export default class AisAspectPane extends React.Component {
     return (
       <div className="AisAspectPane">
         <Row>
-          <Col span={8}>
+          <Col span={9}>
             <CornerstoneViewer layers = {layer1} /> 
           </Col>
-          <Col span={8}>
-            <CornerstoneViewer layers = {layer} />  
+          <Col span={9}>
+            <CornerstoneViewer layers = {layer} /> 
           </Col>
           <Col span={6}>
             <AisHousefieldUnitMean></AisHousefieldUnitMean>
