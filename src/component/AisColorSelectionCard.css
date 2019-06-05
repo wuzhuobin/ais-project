@@ -23,12 +23,10 @@
   font-weight: bold;
 }
 
-.Colors {
+.TableItem {
   text-align: center;
   margin: 3px;
-  color: rgb(245, 245, 245);
 }
-
 
 .Footer {
   text-align: center;
