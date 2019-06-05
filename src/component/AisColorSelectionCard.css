@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.AisColorSelectionCard {
-  text-align: center;
-}
-
 .Affected {
   background-color: rgb(250,250,250);
 }
@@ -201,3 +197,6 @@
   color:gray;
 }
 
+.ScoreIs1 {
+  color:red;
+}

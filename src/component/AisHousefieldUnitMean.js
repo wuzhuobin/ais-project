@@ -1,11 +1,12 @@
 // node_modules
 import React from 'react';
 import { Layout } from 'antd';
-import { Slider } from 'antd';
+// import { Slider } from 'antd';
 import { Row, Col } from 'antd';
 import { withTranslation } from 'react-i18next';
-// me
+//
 import AisColorSelectionCard from './AisColorSelectionCard';
+import AisColorSelectionHeaderCard from './AisColorSelectionHeaderCard';
 import './AisHousefieldUnitMean.css';
 import { ORIENTATION } from './AisColorSelectionCard';
 import AppContext from '../AppContext';
@@ -19,14 +20,17 @@ class AisHousefieldUnitMean extends React.Component {
         <Layout>
           <Layout.Content>
             <Row>
-              <Col span={12}>
+              <Col span={8}>
+                <AisColorSelectionHeaderCard></AisColorSelectionHeaderCard>
+              </Col>
+              <Col span={8}>
                 <AisColorSelectionCard
                   orientation={ORIENTATION.LEFT}
                   affected={this.context.infoAis.Affected_Side === 'Left' ? true : false}
                 >
                 </AisColorSelectionCard>
               </Col>
-              <Col span={12}>
+              <Col span={8}>
                 <AisColorSelectionCard
                   orientation={ORIENTATION.RIGHT}
                   affected={this.context.infoAis.Affected_Side === 'Left' ? false : true}

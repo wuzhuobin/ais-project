@@ -19,7 +19,8 @@ const resources = {
       'RIGHT': '右',
       'ASPECT Score': 'ASPECT 评分',
       'Confident Level': '置信区间',
-      'HOUNSFIELD UNIT MEAN': 'HU 平均值'
+      'HOUNSFIELD UNIT MEAN': 'HU 平均值',
+      'ORIENTATION': '方向'
     }
   }
 };
