@@ -7,14 +7,12 @@ import Hammer from "hammerjs";
 import * as cornerstoneWebImageLoader from "cornerstone-web-image-loader";
 import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader'
 
-const imageId =
-  "https://rawgit.com/cornerstonejs/cornerstoneWebImageLoader/master/examples/Renal_Cell_Carcinoma.jpg";
-
 const divStyle = {
-  width: "512px",
-  height: "512px",
+  // width: "100%",//"512px",
+  height: '75vh',//"512px",
   position: "relative",
-  color: "white"
+  color: "white",
+  flex: 1
 };
 
 const bottomLeftStyle = {
@@ -31,34 +29,6 @@ const bottomRightStyle = {
   color: "white"
 };
 
-function getNiftiImageId(){
-  const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
-  cornerstoneNIFTIImageLoader.external.cornerstone = cornerstone
-  const _imageId = 'nifti://' +
-      window.location.hostname +
-      ':' +
-      window.location.port +
-      '/NiftiData/bet.nii.gz'
-  console.log(_imageId)
-  const imageIdObject = ImageId.fromURL(_imageId)
-  cornerstone.loadAndCacheImage(imageIdObject.url).then(function(image){
-    console.log(image)
-    const numberOfSlices = cornerstone.metaData.get('multiFrameModule', imageIdObject.url).numberOfFrames;
-  });
-  let ret = Array.from(Array(426), (_, i) => `nifti:${imageIdObject.filePath}#${imageIdObject.slice.dimension}-${i}`)
-  // console.log(ret)
-  const stack = {
-    currentImageIdIndex: imageIdObject.slice.index,
-    imageIds: ret
-  };  
-
-  return imageIdObject.url
-  // const numberOfSlices = Cornerstone.metaData.get('multiFrameModule', imageIdObject.url).numberOfFrames;
-  // console.log("Object:" + imageIdObject.url);
-
-}
-
-
 function loadImages(layers, element) {
     const promises = [];
     const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
@@ -70,26 +40,25 @@ function loadImages(layers, element) {
     return Promise.all(promises);
 }
 
-export default class CornerstoneElement extends React.Component {
+export default class CornerstoneViewer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stack: props.stack,
       layers: props.layers,
       viewport: cornerstone.getDefaultViewport(null, undefined),
-      // imageId: props.layer.imageId
+      
     };
-    console.log(props.layers);
+    // console.log(props.layers);
     this.onImageRendered = this.onImageRendered.bind(this);
     this.onNewImage = this.onNewImage.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
     this.onWheelScroll = this.onWheelScroll.bind(this);
-    this.globelayer = props.layer
+    this.contextMenu = this.contextMenu.bind(this);
   }
 
   render() {
     return (
-      <div>
+      <div onContextMenu={this.contextMenu}>
         <div
           className="viewportElement"
           style={divStyle}
@@ -108,8 +77,11 @@ export default class CornerstoneElement extends React.Component {
     );
   }
 
+  contextMenu(e){
+    e.preventDefault();
+  }
+
   onWindowResize() {
-    console.log("onWindowResize");
     cornerstone.resize(this.element);
   }
 
@@ -141,48 +113,32 @@ export default class CornerstoneElement extends React.Component {
         _i = _i - 1;
       }
       const updateImageId = imageId.substr(0, n+3) + _i + imageId.substr(m);
-      // console.log("Wheel Scroll imageId: " +  n + "  " +  m + " "+  _i + " " + imageId);
-      // console.log(updateImageId);
       cornerstone.loadImage(updateImageId).then(function(image) {        
         // cornerstone.displayImage(element, image);        
         cornerstone.setLayerImage(element, image, layerId);
         cornerstone.updateImage(element);
       });  
     });
-
-    // cornerstone.setActiveLayer(element, layers[0].layerId);
-    // cornerstoneTools.scrollToIndex(this.element, updateImageId);
   }
 
-  onImageRendered() {
+  onImageRendered(e) {
     const viewport = cornerstone.getViewport(this.element);
-    console.log(viewport);
-
+    console.log("On image rendered: %O", cornerstone.getLayers(this.element));
     this.setState({
-      viewport
+      viewport: viewport
     });
-
     // console.log("onImageRendered LayerId: " + cornerstone.getActiveLayer(this.element).layerId);
-    console.log("onImageRendered LayerId: %O ",cornerstone.getActiveLayer(this.element));
-    // console.log("onImageRendered: " + cornerstone.getLayers(this.element)[0].layerId);
-    // console.log("onImageRendered: " + cornerstone.getLayers(this.element)[1].layerId);
-
+    // console.log("onImageRendered LayerId: %O ",cornerstone.getActiveLayer(this.element));
   }
 
   onNewImage() {
     const enabledElement = cornerstone.getEnabledElement(this.element);
-
+    console.log("Enter New Image");
     this.setState({
       imageId: enabledElement.image.imageId
     });
-    // cornerstone.updateImage(this.element);
-    // if (cornerstone.getActiveLayer(this.element).layerId === cornerstone.getLayers(this.element)[0].layerId){
-    //   cornerstone.setActiveLayer(this.element,cornerstone.getLayers(this.element)[1].layerId);
-    // }
-    // else{
-    //   cornerstone.setActiveLayer(this.element,cornerstone.getLayers(this.element)[0].layerId);
-    // }
   }
+
   componentWillMount() {
     cornerstoneTools.external.cornerstone = cornerstone;
     cornerstoneTools.external.cornerstoneMath = cornerstoneMath;
@@ -209,18 +165,15 @@ export default class CornerstoneElement extends React.Component {
         /////////////////////
         const imageIdObject = ImageId.fromURL(layer.imageId)
         const numberOfSlices = cornerstone.metaData.get('multiFrameModule', imageIdObject.url).numberOfFrames;
-        console.log(layer.imageId + ':' + imageIdObject.slice.index);
         const stack = {
           currentImageIdIndex: index,
           imageIds: Array.from(Array(numberOfSlices), (_, i) => `nifti:${imageIdObject.filePath}#${imageIdObject.slice.dimension}-${i}`)
         };
-        console.log(layer.imageId)
         // const viewport = cornerstone.getDefaultViewportForImage(element, image);
-        // cornerstone.displayImage(element, image);
         
         if(loaded === false) {
           cornerstoneTools.addStackStateManager(element, ['stack', 'wwwc', 'pan', 'zoom']);
-          cornerstoneTools.addToolState(element, 'stack', stack);         
+          // cornerstoneTools.addToolState(element, 'stack', stack);         
           cornerstoneTools.mouseInput.enable(element);
           cornerstoneTools.mouseWheelInput.enable(element);
           cornerstoneTools.wwwc.activate(element, 1);
@@ -252,13 +205,14 @@ export default class CornerstoneElement extends React.Component {
     );
 
     element.removeEventListener("cornerstonenewimage", this.onNewImage);
-
     window.removeEventListener("resize", this.onWindowResize);
+    element.removeEventListener("mousewheel", this.onWheelScroll);
 
     cornerstone.disable(element);
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // console.log("Enter update");
     // const stackData = cornerstoneTools.getToolState(this.element, "stack");
     // const stack = stackData.data[0];
     // stack.currentImageIdIndex = this.state.stack.currentImageIdIndex;
@@ -270,10 +224,6 @@ export default class CornerstoneElement extends React.Component {
   }
 }
 
-const stack = {
-  imageIds: [imageId],
-  currentImageIdIndex: 0
-};
 
 // const App = () => (
 //   <div>

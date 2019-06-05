@@ -6,16 +6,9 @@ import { Button } from 'antd';
 // me
 import './AisAspectPane.css';
 import AisCornerstoneImageViewer from './component/ais-cornerstone';
-import CornerstoneElement from'./component/ais-cornerstone-viewport'
+import CornerstoneViewer from'./component/ais-cornerstone-viewer'
 
 const { Header, Footer, Sider, Content} = Layout;
-
-const imageId = "https://rawgit.com/cornerstonejs/cornerstoneWebImageLoader/master/examples/Renal_Cell_Carcinoma.jpg";
-
-const stack = {
-  imageIds: [imageId],
-  currentImageIdIndex: 0
-};
 
 const layer = [{
                   imageId: 'nifti://' + window.location.hostname + ':' +
@@ -33,7 +26,7 @@ const layer = [{
                              name: 'Label',
                              opacity: 0.2,
                              viewport: {
-                                  colormap: 'autumn',
+                                  colormap: 'hotIron',
                                   voi: {
                                       windowWidth: 0.1,
                                       windowCenter: 0.5
@@ -42,6 +35,15 @@ const layer = [{
                             }
                 }];
 
+const layer1 = [{
+                  imageId: 'nifti://' + window.location.hostname + ':' +
+                            window.location.port + '/NiftiData/image1.nii.gz',
+                  options: {
+                             name: 'CT',
+                             opacity: 1,
+                             viewport:{ voi: {windowWidth:80, windowCenter:40}}
+                           }
+                }];
 
 export default class AisAspectPane extends React.Component {
   render() {
@@ -49,10 +51,10 @@ export default class AisAspectPane extends React.Component {
       <div>
         <Row>
           <Col span={8}>
-
+            <CornerstoneViewer layers = {layer1} /> 
           </Col>
           <Col span={8}>
-            <CornerstoneElement stack={{...stack}} layers = {layer} />  
+            <CornerstoneViewer layers = {layer} />  
           </Col>
           <Col span={8}>
             <Layout>
