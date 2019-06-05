@@ -3,33 +3,49 @@ import React from 'react';
 import { Layout } from 'antd';
 import { Slider } from 'antd';
 import { Row, Col } from 'antd';
-import { Button } from 'antd';
+import { withTranslation } from 'react-i18next';
 // me
 import AisColorSelectionCard from './AisColorSelectionCard';
-import { ORIENTATION } from './AisColorSelectionCard'; 
+import './AisHousefieldUnitMean.css';
+import { ORIENTATION } from './AisColorSelectionCard';
+import AppContext from '../AppContext';
 
-export default class AisHousefieldUnitMean extends React.Component {
+class AisHousefieldUnitMean extends React.Component {
   render() {
-    return(
+    const t = this.props.t;
+    return (
       <Layout>
-        <Layout.Header><Button>HOUSE FIELD UNIT MEAN</Button></Layout.Header>
+        <Layout.Header className="LayoutHeader">HOUSE FIELD UNIT MEAN</Layout.Header>
         <Layout>
           <Layout.Content>
             <Row>
               <Col span={12}>
-                <AisColorSelectionCard orientation={ORIENTATION.LEFT} affected={false}></AisColorSelectionCard>
+                <AisColorSelectionCard
+                  orientation={ORIENTATION.LEFT}
+                  affected={this.context.infoAis.Affected_Side === 'L' ? true : false}
+                >
+                </AisColorSelectionCard>
               </Col>
               <Col span={12}>
-                <AisColorSelectionCard orientation={ORIENTATION.RIGHT} affected={true}></AisColorSelectionCard>
+                <AisColorSelectionCard
+                  orientation={ORIENTATION.RIGHT}
+                  affected={this.context.infoAis.Affected_Side === 'L' ? false : true}
+                >
+                </AisColorSelectionCard>
               </Col>
             </Row>
           </Layout.Content>
         </Layout>
-          <Layout.Footer className="Footer">
-            Score<br/>7
-            <Slider></Slider>
-          </Layout.Footer>
+        <Layout.Footer className="Footer">
+          {t('Score')}<br />{this.context.infoAis.ASPECT_Final_Score}<br/>
+          {t('Confident Level')}
+            <Slider disabled={false} value={Number.parseInt(this.context.infoAis.ASPECT_Final_Score)} max={10} min={0}></Slider>
+        </Layout.Footer>
       </Layout>
     );
   }
 }
+
+AisHousefieldUnitMean.contextType = AppContext;
+
+export default withTranslation()(AisHousefieldUnitMean)
