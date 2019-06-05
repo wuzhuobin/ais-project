@@ -6,17 +6,56 @@ import { Row, Col } from 'antd';
 import './AisAspectPane.css';
 import AisCornerstoneImageViewer from './component/ais-cornerstone';
 import AisHousefieldUnitMean from './component/AisHousefieldUnitMean';
+import CornerstoneViewer from'./component/ais-cornerstone-viewer'
+
+// const { Header, Footer, Sider, Content} = Layout;
+
+
+const layer = [{
+                  imageId: 'nifti://' + window.location.hostname + ':' +
+                            window.location.port + '/NiftiData/image.nii.gz',
+                  options: {
+                             name: 'CT',
+                             opacity: 1,
+                             viewport:{ voi: {windowWidth:80, windowCenter:40}}
+                           }
+                },
+                {
+                  imageId: 'nifti://' + window.location.hostname + ':' +
+                            window.location.port +'/NiftiData/bet.nii.gz',
+                  options: {
+                             name: 'Label',
+                             opacity: 0.2,
+                             viewport: {
+                                  colormap: 'hotIron',
+                                  voi: {
+                                      windowWidth: 0.1,
+                                      windowCenter: 0.5
+                                       }
+                                      }
+                            }
+                }];
+
+const layer1 = [{
+                  imageId: 'nifti://' + window.location.hostname + ':' +
+                            window.location.port + '/NiftiData/image1.nii.gz',
+                  options: {
+                             name: 'CT',
+                             opacity: 1,
+                             viewport:{ voi: {windowWidth:80, windowCenter:40}}
+                           }
+                }];
 
 export default class AisAspectPane extends React.Component {
   render() {
     return (
       <div className="AisAspectPane">
         <Row>
-          <Col span={9}>
-            <AisCornerstoneImageViewer></AisCornerstoneImageViewer>
+          <Col span={8}>
+            <CornerstoneViewer layers = {layer1} /> 
           </Col>
-          <Col span={9}>
-            <AisCornerstoneImageViewer></AisCornerstoneImageViewer>
+          <Col span={8}>
+            <CornerstoneViewer layers = {layer} />  
           </Col>
           <Col span={6}>
             <AisHousefieldUnitMean></AisHousefieldUnitMean>
@@ -36,3 +75,5 @@ export default class AisAspectPane extends React.Component {
     );
   }
 }
+
+//                     <AisCornerstoneImageViewer></AisCornerstoneImageViewer>   
