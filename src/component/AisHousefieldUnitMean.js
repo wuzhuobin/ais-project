@@ -39,10 +39,7 @@ class AisHousefieldUnitMean extends React.Component {
         <Layout.Footer className="Footer">
          <br/>
          <br/>
-         <br/>
          <h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.context.infoAis.ASPECT_Final_Score}</h2>
-         <br/>
-         <br/>
          <br/>
         </Layout.Footer>
       </Layout>
@@ -59,4 +56,26 @@ export default withTranslation()(AisHousefieldUnitMean)
 ####Hide for later use 
           <h2 className="ConfiendentLevel">{t('Confident Level')}</h2>
             <Slider disabled={false} value={Number.parseInt(this.context.infoAis.ASPECT_Final_Score)} max={10} min={0}></Slider>
+*/
+
+/*
+<span className='CAffected'>{t('C - Caudate')}</span>
+{t(' ')}
+<span className='ICAffected'>{t('IC - Internal Capsule')}</span>
+{t(' ')}
+<span className='LAffected'>{t('L - Lentiform nucleus')}</span>
+{t(' ')}
+<span className='IAffected'>{t('I - Insular ribbon')}</span>
+{t(' ')}
+<span className='M1Affected'>{t('M1 - Anterior MCA cortex')}</span>
+{t(' ')}
+<span className='M2Affected'>{t('M2 - MCA cortex lateral to the insular ribbon')}</span>
+{t(' ')}
+<span className='M3Affected'>{t('M3 - Posterior MCA cortex')}</span>
+{t(' ')}
+<span className='M4Affected'>{t('M4 - Aneterior MCA superior territory')}</span>
+{t(' ')}
+<span className='M5Affected'>{t('M5 - Lateral MCA superior territory')}</span>
+{t(' ')}
+<span className='M6Affected'>{t('M6 - Posterior MCA superior territory')}</span>
 */
