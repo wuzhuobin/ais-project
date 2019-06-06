@@ -7,6 +7,8 @@ import Hammer from "hammerjs";
 import * as cornerstoneWebImageLoader from "cornerstone-web-image-loader";
 import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader'
 
+import ImageScrollbar from '../ImageScrollbar/ImageScrollbar.js';
+
 const divStyle = {
   // width: "100%",//"512px",
   height: '75vh',//"512px",
@@ -29,16 +31,16 @@ const bottomRightStyle = {
   color: "white"
 };
 
-function loadImages(layers, element) {
-    const promises = [];
-    const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
-    layers.forEach(function(layer) {
-      const imageIdObject = ImageId.fromURL(layer.imageId);
-      const loadPromise = cornerstone.loadAndCacheImage(imageIdObject.url);
-      promises.push(loadPromise);
-    });
-    return Promise.all(promises);
-}
+// function loadImages(layers, element) {
+//     const promises = [];
+//     const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
+//     layers.forEach(function(layer) {
+//       const imageIdObject = ImageId.fromURL(layer.imageId);
+//       const loadPromise = cornerstone.loadAndCacheImage(imageIdObject.url);
+//       promises.push(loadPromise);
+//     });
+//     return Promise.all(promises);
+// }
 
 export default class CornerstoneViewer extends React.Component {
   constructor(props) {
@@ -46,14 +48,26 @@ export default class CornerstoneViewer extends React.Component {
     this.state = {
       layers: props.layers,
       viewport: cornerstone.getDefaultViewport(null, undefined),
-      
+      viewportHeight: '100%',
+      currentImageIdIndex: 2,
+      numberOfSlices: 100,
+      renderScrollbar: props.renderScrollbar,
+      isLeftClick: false,
     };
     // console.log(props.layers);
     this.onImageRendered = this.onImageRendered.bind(this);
     this.onNewImage = this.onNewImage.bind(this);
+    this.onLayerAdded = this.onLayerAdded.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
     this.onWheelScroll = this.onWheelScroll.bind(this);
     this.contextMenu = this.contextMenu.bind(this);
+    this.imageSliderOnInputCallback = this.imageSliderOnInputCallback.bind(this);
+    this.loadImages = this.loadImages.bind(this);
+    this.scrollToSlice = this.scrollToSlice.bind(this);
+    this.renderScrollbar = this.renderScrollbar.bind(this);
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
   }
 
   render() {
@@ -73,8 +87,56 @@ export default class CornerstoneViewer extends React.Component {
             {this.state.viewport.voi.windowCenter}
           </div>
         </div>
+        {this.renderScrollbar(this.state.renderScrollbar)}
       </div>
     );
+  }
+
+  renderScrollbar(bool){
+    if (bool){
+      return (<ImageScrollbar
+          onInputCallback={this.imageSliderOnInputCallback}
+          max= {this.state.numberOfSlices}
+          value={this.state.currentImageIdIndex}
+          height={this.state.viewportHeight}
+        />);
+    }
+    else{
+      return null;
+    }
+
+  }
+
+  loadImages(layers, element) {
+      const promises = [];
+      const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
+      layers.forEach(function(layer) {
+        const imageIdObject = ImageId.fromURL(layer.imageId);
+        const loadPromise = cornerstone.loadAndCacheImage(imageIdObject.url);
+        promises.push(loadPromise);
+      });
+      return Promise.all(promises);
+  }
+
+  scrollToSlice(number){
+    cornerstone.getEnabledElements().forEach(function(HTMLElement){
+      const _element = HTMLElement.element
+      const layers = cornerstone.getLayers(_element);
+      layers.forEach(function(layer,index){
+        var imageId = layer.image.imageId;
+        var layerId = layer.layerId;
+        console.log(index + ":" + imageId);
+        var n = imageId.search("#z-");
+        var m = imageId.search(",t-");
+        var _i = parseInt(number);
+        const updateImageId = imageId.substr(0, n+3) + _i + imageId.substr(m);
+        cornerstone.loadImage(updateImageId).then(function(image) {        
+          // cornerstone.displayImage(element, image);        
+          cornerstone.setLayerImage(_element, image, layerId);
+          cornerstone.updateImage(_element);
+        });  
+      });
+    });
   }
 
   contextMenu(e){
@@ -82,61 +144,108 @@ export default class CornerstoneViewer extends React.Component {
   }
 
   onWindowResize() {
+    this.setState({
+      viewportHeight: '${this.element.clientHeight - 20}px'
+    });
     cornerstone.resize(this.element);
   }
 
   onWheelScroll(e) {
     const element = this.element;
-    console.log("Wheel Scroll: %O ", cornerstone.getLayers(this.element));
-    const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
-    const layers = cornerstone.getLayers(this.element);
-    layers.forEach(function(layer,index){
-      var imageId = layer.image.imageId;
-      var layerId = layer.layerId;
-      console.log(index + ":" + imageId);
-      var n = imageId.search("#z-");
-      var m = imageId.search(",t-");
-      var _index = imageId.substring(n+3,m);
-      var _i = parseInt(_index);
-      const numberOfSlices = cornerstone.metaData.get('multiFrameModule', imageId).numberOfFrames;
-      var n_slices = parseInt(numberOfSlices);
-      if (e.wheelDelta < 0){
-        _i = _i + 1;
-      }
-      else{
-        _i = _i - 1;
-      }
-      if (_i < 0){
-        _i = 0;
-      }
-      if (_i == n_slices){
-        _i = _i - 1;
-      }
-      const updateImageId = imageId.substr(0, n+3) + _i + imageId.substr(m);
-      cornerstone.loadImage(updateImageId).then(function(image) {        
-        // cornerstone.displayImage(element, image);        
-        cornerstone.setLayerImage(element, image, layerId);
-        cornerstone.updateImage(element);
-      });  
+    console.log("Wheel Scroll: %O ", cornerstone.getEnabledElements());
+    // const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
+    var updatedIndex = 0;
+    const maxSlices = parseInt(this.state.numberOfSlices);
+    var _i = parseInt(this.state.currentImageIdIndex);
+
+    if (e.wheelDelta < 0){
+      _i = _i + 1;
+    }
+    else{
+      _i = _i - 1;
+    }
+    if (_i < 0){
+      _i = 0;
+    }
+    if (_i > maxSlices){
+      _i = _i - 1;
+    }
+    updatedIndex = _i;
+
+    this.setState({
+      currentImageIdIndex: updatedIndex
     });
+    this.scrollToSlice(updatedIndex);
+  }
+
+  imageSliderOnInputCallback(value){
+    console.log("At imageSliderOnInputCallBack: " + value);
+    this.setState({
+      currentImageIdIndex: value,
+    });
+    this.scrollToSlice(value);
   }
 
   onImageRendered(e) {
     const viewport = cornerstone.getViewport(this.element);
     console.log("On image rendered: %O", cornerstone.getLayers(this.element));
+    const layers = cornerstone.getLayers(this.element);
+    const _imageId = layers[0].image.imageId;
+    var n = _imageId.search("#z-");
+    var m = _imageId.search(",t-");
+    var _index = _imageId.substring(n+3,m);
+    var _i = parseInt(_index);
+    console.log("On image rendered: %O", this.state.currentImageIdIndex);
     this.setState({
-      viewport: viewport
+      viewport: viewport,
+      currentImageIdIndex: _i
     });
+    // cornerstone.getEnabledElements().forEach(function(HTMLElement){
+    //   const _element = HTMLElement.element;
+    //   cornerstone.updateImage(_element);
+    // });
     // console.log("onImageRendered LayerId: " + cornerstone.getActiveLayer(this.element).layerId);
     // console.log("onImageRendered LayerId: %O ",cornerstone.getActiveLayer(this.element));
   }
 
-  onNewImage() {
-    const enabledElement = cornerstone.getEnabledElement(this.element);
-    console.log("Enter New Image");
+  onNewImage(image) {
+    // const enabledElement = cornerstone.getEnabledElement(this.element);
+    console.log("Enter New Image: %O", image);
+    // this.setState({
+    //   imageId: enabledElement.image.imageId
+    // });
+  }
+
+  onLayerAdded(e){
+    const _enableElement = cornerstone.getLayer(this.element,e.detail.layerId)
+    const _numberOfSlices = cornerstone.metaData.get('multiFrameModule', _enableElement.image.imageId).numberOfFrames
+    // console.log(_numberOfSlices + " Layer added: %O", _enableElement.image );
+    var _updatedSlices = parseInt(_numberOfSlices) - 1
     this.setState({
-      imageId: enabledElement.image.imageId
+      numberOfSlices: _updatedSlices
     });
+  }
+
+  onMouseDown(e){
+    console.log("handleClick mouse down: %O", e);
+  }
+
+  onMouseMove(e){
+    // console.log("handleClick mouse move: %O", e);
+    cornerstone.getEnabledElements().forEach(function(HTMLElement){
+      const _element = HTMLElement.element
+      if (HTMLElement.element === e.detail.element){
+        // console.log("handleClick mouse move: Same element");
+      }
+      else{
+        // console.log("handleClick mouse move: Different element");
+        cornerstone.updateImage(_element);
+      }
+    });
+  }
+
+  onMouseUp(e){
+    console.log("handleClick mouse: %O", e);
   }
 
   componentWillMount() {
@@ -155,8 +264,8 @@ export default class CornerstoneViewer extends React.Component {
     // Enable the DOM Element for use with Cornerstone
     let loaded = false;
     cornerstone.enable(element);
-    const _layers = this.state.layers;
-    loadImages(this.state.layers, element).then(function(images) {
+    const _layers = this.state.layers;    
+    this.loadImages(this.state.layers, element).then(function(images) {
       images.forEach(function(image, index) {
         const layer = _layers[index];
         const layerId = cornerstone.addLayer(element, image, layer.options);
@@ -164,16 +273,16 @@ export default class CornerstoneViewer extends React.Component {
         
         /////////////////////
         const imageIdObject = ImageId.fromURL(layer.imageId)
-        const numberOfSlices = cornerstone.metaData.get('multiFrameModule', imageIdObject.url).numberOfFrames;
+        const _numberOfSlices = cornerstone.metaData.get('multiFrameModule', imageIdObject.url).numberOfFrames;
         const stack = {
           currentImageIdIndex: index,
-          imageIds: Array.from(Array(numberOfSlices), (_, i) => `nifti:${imageIdObject.filePath}#${imageIdObject.slice.dimension}-${i}`)
+          imageIds: Array.from(Array(_numberOfSlices), (_, i) => `nifti:${imageIdObject.filePath}#${imageIdObject.slice.dimension}-${i},t-0`)
         };
         // const viewport = cornerstone.getDefaultViewportForImage(element, image);
         
         if(loaded === false) {
           cornerstoneTools.addStackStateManager(element, ['stack', 'wwwc', 'pan', 'zoom']);
-          // cornerstoneTools.addToolState(element, 'stack', stack);         
+          cornerstoneTools.addToolState(element, 'stack', stack);         
           cornerstoneTools.mouseInput.enable(element);
           cornerstoneTools.mouseWheelInput.enable(element);
           cornerstoneTools.wwwc.activate(element, 1);
@@ -192,9 +301,15 @@ export default class CornerstoneViewer extends React.Component {
         "cornerstoneimagerendered",
         this.onImageRendered
       );
-    element.addEventListener("cornerstonenewimage", this.onNewImage);
+    element.addEventListener("cornerstonelayeradded", this.onLayerAdded);
     window.addEventListener("resize", this.onWindowResize);
     element.addEventListener("mousewheel", this.onWheelScroll);
+    // element.addEventListener("mousedown", this.onMouseDown);
+    // element.addEventListener("mouseup", this.onMouseUp);
+    element.addEventListener("cornerstonetoolsmousedrag",this.onMouseMove);
+    this.setState({
+      viewportHeight: '${this.element.clientHeight - 20}px',
+    });
   }
 
   componentWillUnmount() {
@@ -203,7 +318,7 @@ export default class CornerstoneViewer extends React.Component {
       "cornerstoneimagerendered",
       this.onImageRendered
     );
-
+    element.removeEventListener("cornerstonelayeradded", this.onLayerAdded);
     element.removeEventListener("cornerstonenewimage", this.onNewImage);
     window.removeEventListener("resize", this.onWindowResize);
     element.removeEventListener("mousewheel", this.onWheelScroll);
@@ -212,7 +327,17 @@ export default class CornerstoneViewer extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log("Enter update");
+    console.log("Enter update: %O",cornerstone.getEnabledElement(this.element));
+    const layers = cornerstone.getEnabledElement(this.element).layers;
+    if (layers[0] !== undefined)
+    {
+      const _imageId = layers[0].image.imageId;
+      var n = _imageId.search("#z-");
+      var m = _imageId.search(",t-");
+      var _index = _imageId.substring(n+3,m);
+      var _i = parseInt(_index);
+      console.log("Enter update defined: %O", this.state.currentImageIdIndex);
+    }
     // const stackData = cornerstoneTools.getToolState(this.element, "stack");
     // const stack = stackData.data[0];
     // stack.currentImageIdIndex = this.state.stack.currentImageIdIndex;
@@ -299,3 +424,48 @@ export default class CornerstoneViewer extends React.Component {
 
 
 */
+
+/*  onWheelScroll(e) {
+    const element = this.element;
+    console.log("Wheel Scroll: %O ", cornerstone.getEnabledElements());
+    // const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
+    var updatedIndex = 0;
+    const maxSlices = parseInt(this.state.numberOfSlices) - 1;
+    cornerstone.getEnabledElements().forEach(function(HTMLElement){
+      const _element = HTMLElement.element
+      const layers = cornerstone.getLayers(_element);
+      layers.forEach(function(layer,index){
+        var imageId = layer.image.imageId;
+        var layerId = layer.layerId;
+        console.log(index + ":" + imageId);
+        var n = imageId.search("#z-");
+        var m = imageId.search(",t-");
+        var _index = imageId.substring(n+3,m);
+        var _i = parseInt(_index);
+        const numberOfSlices = cornerstone.metaData.get('multiFrameModule', imageId).numberOfFrames;
+        var n_slices = parseInt(numberOfSlices);
+        if (e.wheelDelta < 0){
+          _i = _i + 1;
+        }
+        else{
+          _i = _i - 1;
+        }
+        if (_i < 0){
+          _i = 0;
+        }
+        if (_i === n_slices){
+          _i = _i - 1;
+        }
+        const updateImageId = imageId.substr(0, n+3) + _i + imageId.substr(m);
+        updatedIndex = _i;
+        cornerstone.loadImage(updateImageId).then(function(image) {        
+          // cornerstone.displayImage(element, image);        
+          cornerstone.setLayerImage(_element, image, layerId);
+          cornerstone.updateImage(_element);
+        });  
+      });
+    });
+    this.setState({
+      currentImageIdIndex: updatedIndex
+    });
+  }*/
