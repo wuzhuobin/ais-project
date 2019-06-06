@@ -1,0 +1,51 @@
+.AisColorSelectionHeaderCard {
+  background-color: rgb(250,250,250);
+}
+
+.AisColorSelectionHeaderCard .Title {
+  text-align: center;
+  display: block;
+  font-size: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.TableItem {
+  text-align: center;
+  margin: 3px;
+}
+
+.AisColorSelectionHeaderCard .C {
+}
+
+
+.AisColorSelectionHeaderCard .IC {
+}
+
+
+.AisColorSelectionHeaderCard .L {
+}
+
+
+.AisColorSelectionHeaderCard .I {
+}
+
+
+.AisColorSelectionHeaderCard .M1 {
+}
+
+.AisColorSelectionHeaderCard .M2 {
+}
+
+.AisColorSelectionHeaderCard .M3 {
+}
+
+.AisColorSelectionHeaderCard .M4 {
+}
+
+.AisColorSelectionHeaderCard .M5 {
+}
+
+.AisColorSelectionHeaderCard .M6 {
+}

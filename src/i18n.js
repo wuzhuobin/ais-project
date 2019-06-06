@@ -12,14 +12,15 @@ const resources = {
       'English': '中文',
       'Patient ID': '病人',
       'Gender': '性别',
-      'Side of Acute Cerebrovascular Lesion': '大脑可疑病灶侧',
+      'Acute Cerebrovascular Lesion Side': '大脑可疑病灶侧',
       'Name': '姓名',
       'Scan time': '扫描时间',
       'LEFT': '左',
       'RIGHT': '右',
       'ASPECT Score': 'ASPECT 评分',
       'Confident Level': '置信区间',
-      'HOUNSFIELD UNIT MEAN': 'HU 平均值'
+      'HOUNSFIELD UNIT MEAN': 'HU 平均值',
+      'ORIENTATION': '方向'
     }
   }
 };

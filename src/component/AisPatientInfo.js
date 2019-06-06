@@ -17,7 +17,7 @@ class AisPatientInfo extends React.Component {
               <td>{this.context.infoAis.Patient_ID}</td>
               <td><label className="l2">{t('Gender')}:</label></td>
               <td>{this.context.infoAis.Patient_Gender}</td>
-              <td><label className="l3">{t('Side of Acute Cerebrovascular Lesion')}:</label></td>
+              <td><label className="l3">{t('Acute Cerebrovascular Lesion Side')}:</label></td>
               <td>{this.context.infoAis.Affected_Side}</td>
             </tr>
             <tr>

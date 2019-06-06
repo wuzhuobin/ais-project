@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card } from 'antd';
 import { withTranslation } from 'react-i18next';
-// me
+//
 import './AisColorSelectionCard.css';
 import AppContext from '../AppContext';
 
