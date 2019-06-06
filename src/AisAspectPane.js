@@ -38,7 +38,7 @@ const layer = [{
 
 const layer1 = [{
                   imageId: 'nifti://' + window.location.hostname + ':' +
-                            window.location.port + '/NiftiData/image1.nii.gz',
+                            window.location.port + '/NiftiData/image.nii.gz',
                   options: {
                              name: 'CT',
                              opacity: 1,
@@ -51,13 +51,13 @@ export default class AisAspectPane extends React.Component {
     return (
       <div className="AisAspectPane">
         <Row>
-          <Col span={9}>
-            <CornerstoneViewer layers = {layer1} /> 
+          <Col span={8}>
+            <CornerstoneViewer layers = {[layer[0]]} renderScrollbar = {false}/> 
           </Col>
-          <Col span={9}>
-            <CornerstoneViewer layers = {layer} /> 
+          <Col span={8}>
+            <CornerstoneViewer layers = {layer} renderScrollbar = {true}/>  
           </Col>
-          <Col span={6}>
+          <Col span={8}>
             <AisHousefieldUnitMean></AisHousefieldUnitMean>
           </Col>
         </Row>
