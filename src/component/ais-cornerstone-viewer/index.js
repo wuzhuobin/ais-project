@@ -31,6 +31,44 @@ const bottomRightStyle = {
   color: "white"
 };
 
+function getCustomLookupTable1() {
+  const colormap = cornerstone.colors.getColormap('myCustomColorMap1');
+  colormap.setNumberOfColors(256);
+
+  colormap.insertColor(0, [0,0,0,0]);
+  colormap.insertColor(1, [255, 238, 88,  255]);
+  colormap.insertColor(2, [156, 204, 101, 255]);
+  colormap.insertColor(3, [41,  182, 246, 255]);
+  colormap.insertColor(4, [92,  107, 192, 255]);
+  colormap.insertColor(5, [120, 144, 156, 255]);
+  colormap.insertColor(6, [255, 167, 38,  255]);
+  colormap.insertColor(7, [38,  166, 154, 255]);
+  colormap.insertColor(8, [102, 187, 106, 255]);
+  colormap.insertColor(9, [141, 110, 99,  255]);
+  colormap.insertColor(10,[171, 71,  188, 255]); 
+  colormap.insertColor(11, [255, 238, 88,  255]);
+  colormap.insertColor(12, [156, 204, 101, 255]);
+  colormap.insertColor(13, [41,  182, 246, 255]);
+  colormap.insertColor(14, [92,  107, 192, 255]);
+  colormap.insertColor(15, [120, 144, 156, 255]);
+  colormap.insertColor(16, [255, 167, 38,  255]);
+  colormap.insertColor(17, [38,  166, 154, 255]);
+  colormap.insertColor(18, [102, 187, 106, 255]);
+  colormap.insertColor(19, [141, 110, 99,  255]);
+  colormap.insertColor(20,[171, 71,  188, 255]);        
+  console.log("GET CUSTOM LOOKUP TABLE1: %O", colormap);
+  return colormap;
+}
+
+function getCustomLookupTable2() {
+  const colormap = cornerstone.colors.getColormap('myCustomColorMap2');
+  colormap.setNumberOfColors(256);
+
+  colormap.insertColor(0, [0,0,0,0]);
+  colormap.insertColor(1, [255, 0, 0, 255]);    
+
+  return colormap;
+}
 // function loadImages(layers, element) {
 //     const promises = [];
 //     const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
@@ -41,6 +79,7 @@ const bottomRightStyle = {
 //     });
 //     return Promise.all(promises);
 // }
+
 
 export default class CornerstoneViewer extends React.Component {
   constructor(props) {
@@ -147,7 +186,6 @@ export default class CornerstoneViewer extends React.Component {
     this.setState({
       viewportHeight: (this.element.clientHeight - 20)//(this.element.clientHeight - 20)+'px'
     });
-    console.log("Resize: %O", this.state.viewportHeight);
     cornerstone.resize(this.element);
   }
 
@@ -255,7 +293,8 @@ export default class CornerstoneViewer extends React.Component {
     cornerstoneWebImageLoader.external.cornerstone = cornerstone;
     cornerstoneTools.external.Hammer = Hammer;
     cornerstoneNIFTIImageLoader.external.cornerstone = cornerstone
-
+    getCustomLookupTable1();
+    getCustomLookupTable2();
   }
 
   componentDidMount() {

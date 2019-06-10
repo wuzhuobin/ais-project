@@ -10,7 +10,6 @@ import CornerstoneViewer from'./component/ais-cornerstone-viewer'
 
 // const { Header, Footer, Sider, Content} = Layout;
 
-
 const layer = [{
                   imageId: 'nifti://' + window.location.hostname + ':' +
                             window.location.port + '/NiftiData/image.nii.gz',
@@ -25,12 +24,12 @@ const layer = [{
                             window.location.port +'/NiftiData/image-atlas-contour.nii.gz',
                   options: {
                              name: 'Label',
-                             opacity: 0.2,
+                             opacity: 1,
                              viewport: {
-                                  colormap: 'pet20Step',
+                                  colormap: 'myCustomColorMap1',
                                   voi: {
-                                      windowWidth: 20,
-                                      windowCenter: 10
+                                      windowWidth: 255,
+                                      windowCenter: 127.5
                                        }
                                       }
                             }
@@ -40,12 +39,12 @@ const layer = [{
                             window.location.port +'/NiftiData/image-ais.nii.gz',
                   options: {
                              name: 'Label2',
-                             opacity: 0.2,
+                             opacity: 0.4,
                              viewport: {
-                                  colormap: 'pet20Step',
+                                  colormap: 'myCustomColorMap2',
                                   voi: {
-                                      windowWidth: 20,
-                                      windowCenter: 10
+                                      windowWidth: 255,
+                                      windowCenter: 127.5
                                        }
                                       }
                             }
