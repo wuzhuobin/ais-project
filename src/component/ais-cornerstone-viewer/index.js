@@ -145,8 +145,9 @@ export default class CornerstoneViewer extends React.Component {
 
   onWindowResize() {
     this.setState({
-      viewportHeight: '${this.element.clientHeight - 20}px'
+      viewportHeight: (this.element.clientHeight - 20)//(this.element.clientHeight - 20)+'px'
     });
+    console.log("Resize: %O", this.state.viewportHeight);
     cornerstone.resize(this.element);
   }
 
@@ -308,7 +309,7 @@ export default class CornerstoneViewer extends React.Component {
     // element.addEventListener("mouseup", this.onMouseUp);
     element.addEventListener("cornerstonetoolsmousedrag",this.onMouseMove);
     this.setState({
-      viewportHeight: '${this.element.clientHeight - 20}px',
+      viewportHeight: (this.element.clientHeight - 20),
     });
   }
 
