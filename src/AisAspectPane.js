@@ -27,7 +27,7 @@ const layer = [{
                              name: 'Label',
                              opacity: 0.2,
                              viewport: {
-                                  colormap: 'hotIron',
+                                  colormap: 'autumn',
                                   voi: {
                                       windowWidth: 0.1,
                                       windowCenter: 0.5
