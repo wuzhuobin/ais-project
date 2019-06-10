@@ -22,15 +22,30 @@ const layer = [{
                 },
                 {
                   imageId: 'nifti://' + window.location.hostname + ':' +
-                            window.location.port +'/NiftiData/bet.nii.gz',
+                            window.location.port +'/NiftiData/image-atlas-contour.nii.gz',
                   options: {
                              name: 'Label',
                              opacity: 0.2,
                              viewport: {
-                                  colormap: 'hotIron',
+                                  colormap: 'pet20Step',
                                   voi: {
-                                      windowWidth: 0.1,
-                                      windowCenter: 0.5
+                                      windowWidth: 20,
+                                      windowCenter: 10
+                                       }
+                                      }
+                            }
+                },
+                {
+                  imageId: 'nifti://' + window.location.hostname + ':' +
+                            window.location.port +'/NiftiData/image-ais.nii.gz',
+                  options: {
+                             name: 'Label2',
+                             opacity: 0.2,
+                             viewport: {
+                                  colormap: 'pet20Step',
+                                  voi: {
+                                      windowWidth: 20,
+                                      windowCenter: 10
                                        }
                                       }
                             }
