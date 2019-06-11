@@ -10,10 +10,12 @@ import AisOnlineViewer from './AisOnlineViewer';
 import InfoAisSample from './info_ais_sample.json';
 import AppContext from './AppContext';
 
+
 function App() {
   const testContext = {infoAis: InfoAisSample};
+  const appContext = React.createContext();
   return (
-    <div className="App"><AppContext.Provider value={testContext}>
+    <div className="App"><AppContext.Provider value={appContext}>
       <AisPageHeader></AisPageHeader>
       <AisPatientInfo></AisPatientInfo>
       <AisOnlineViewer></AisOnlineViewer>
