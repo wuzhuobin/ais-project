@@ -1,0 +1,68 @@
+{
+	"Patient_ID" 				: "A1234567",
+	"Patient_Name" 				: "Chan Tai Man",
+	"Patient_Age" 				: "34",
+	"Patient_Gender" 			: "M",
+	"Scan_Time"		 			: "2019-5-14 11:32am",
+	"Affected_Side"		 		: "Left",
+	"ASPECT_Final_Score"		: "7",
+
+	"Loaded_Module":
+	{
+		"Report" 	: "False",
+		"ASPECT" 	: "True",
+		"CTA" 		: "False",
+		"Mismatch" 	: "False"
+	},
+
+	"ASPECT_Score":
+	{
+		"L_Caudate"			: "1",
+		"L_Insularribbon"	: "1",
+		"L_InternalCapsule"	: "1",
+		"L_LentiformNucleus": "0",
+		"L_M1"				: "0",
+		"L_M2"				: "0",
+		"L_M3"				: "0",
+		"L_M4"				: "0",
+		"L_M5"				: "0",
+		"L_M6"				: "0",
+		"R_Caudate"			: "0",
+		"R_Insularribbon"	: "0",
+		"R_InternalCapsule"	: "0",
+		"R_LentiformNucleus": "0",
+		"R_M1"				: "0",
+		"R_M2"				: "0",
+		"R_M3"				: "0",
+		"R_M4"				: "0",
+		"R_M5"				: "0",
+		"R_M6"				: "0"
+	},
+
+	"HU_Mean":
+	{
+		"L_Caudate"			: "32.5",
+		"L_Insularribbon"	: "34.5",
+		"L_InternalCapsule"	: "32.4",
+		"L_LentiformNucleus": "37.5",
+		"L_M1"				: "34.8",
+		"L_M2"				: "34.0",
+		"L_M3"				: "35.3",
+		"L_M4"				: "36.4",
+		"L_M5"				: "31.4",
+		"L_M6"				: "32.7",
+		"R_Caudate"			: "37.8",
+		"R_Insularribbon"	: "34.9",
+		"R_InternalCapsule"	: "36.3",
+		"R_LentiformNucleus": "31.7",
+		"R_M1"				: "37.8",
+		"R_M2"				: "39.2",
+		"R_M3"				: "37.5",
+		"R_M4"				: "36.7",
+		"R_M5"				: "38.9",
+		"R_M6"				: "35.2"
+	},
+
+	"Background_Image_Path" 	: "/home/image-bet-mask.nii.gz",
+	"Atlas_Image_Path" 			: "/home/image-atlas-contour.nii.gz"
+}
