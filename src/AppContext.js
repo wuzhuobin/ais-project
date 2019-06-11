@@ -2,7 +2,7 @@
 import React from 'react';
 //
 
-function GetUrlParam(paraName) {
+/*function GetUrlParam(paraName) {
 	var url = document.location.toString();
 	var arrObj = url.split("?");
 
@@ -32,11 +32,10 @@ console.log(user)
 console.log(number)
 console.log(path)
 
-var currentDir = "/home/sharefolder/websiteFiles/Data/ProgramData/Dg/" + user + "/" + number + "/CT/" + path
-var jsonPath   = "/home/sharefolder/websiteFiles/Data/ProgramData/Dg/" + user + "/" + number + "/CT/" + path + "/info_ais.json"
-console.log(jsonPath)
+const currentDir = "/home/sharefolder/websiteFiles/Data/ProgramData/Dg/" + user + "/" + number + "/CT/" + path
+const jsonPath   = "/home/sharefolder/websiteFiles/Data/ProgramData/Dg/" + user + "/" + number + "/CT/" + path + "/info_ais.json"
+console.log(jsonPath)*/
 
 export default React.createContext({
-  infoAis: jsonPath,
-  workingDir: currentDir
+  infoAis: ''
 });
