@@ -4,6 +4,7 @@ import { Tabs } from 'antd';
 // me
 import AisReportPane from './AisReportPane';
 import AisAspectPane from './AisAspectPane';
+import AisCtaPane from './AisCtaPane';
 import './AisOnlineViewer.css';
 import AppContext from './AppContext';
 
@@ -30,7 +31,9 @@ export default class AisOnlineViewer extends React.Component {
           }
           {
             this.context.infoAis.Loaded_Module.CTA === 'True' ?
-              <Tabs.TabPane tab="CTA" key="CTA"></Tabs.TabPane>
+              <Tabs.TabPane tab="CTA" key="CTA">
+                <AisCtaPane></AisCtaPane>
+              </Tabs.TabPane>
               :
               null
           }
