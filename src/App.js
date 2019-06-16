@@ -2,7 +2,7 @@
 import React , {Component} from 'react';
 import 'antd/dist/antd.css';
 
-// me
+//
 import './App.css';
 import AisPageHeader from './component/AisPageHeader';
 import AisPatientInfo from './component/AisPatientInfo';

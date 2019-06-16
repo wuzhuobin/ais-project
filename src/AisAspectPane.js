@@ -4,9 +4,8 @@ import { Row, Col } from 'antd';
 // import { Button } from 'antd';
 // me
 import './AisAspectPane.css';
-import AisCornerstoneImageViewer from './component/ais-cornerstone';
 import AisHousefieldUnitMean from './component/AisHousefieldUnitMean';
-import CornerstoneViewer from'./component/ais-cornerstone-viewer';
+import CornerstoneViewer from './component/ais-cornerstone-viewer';
 import AppContext from './AppContext';
 // const { Header, Footer, Sider, Content} = Layout;
 
@@ -73,15 +72,15 @@ export default class AisAspectPane extends React.Component {
                               }
                   }];
 
-  const layer1 = [{
-                    imageId: 'nifti://' + window.location.hostname + ':' + window.location.port + 
-                              this.context.workingDir + '/image.nii.gz',
-                    options: {
-                               name: 'CT',
-                               opacity: 1,
-                               viewport:{ voi: {windowWidth:80, windowCenter:40}}
-                             }
-                  }];
+    // const layer1 = [{
+    //   imageId: 'nifti://' + window.location.hostname + ':' + window.location.port +
+    //     this.context.workingDir + '/image.nii.gz',
+    //   options: {
+    //     name: 'CT',
+    //     opacity: 1,
+    //     viewport: { voi: { windowWidth: 80, windowCenter: 40 } }
+    //   }
+    // }];
 
     console.log("ertyuifghjkfghjk")
     console.log(this.context)
@@ -90,10 +89,10 @@ export default class AisAspectPane extends React.Component {
       <div className="AisAspectPane">
         <Row>
           <Col span={8}>
-            <CornerstoneViewer layers = {[layer[0]]} renderScrollbar = {false}/> 
+            <CornerstoneViewer layers={[layer[0]]} renderScrollbar={false} />
           </Col>
           <Col span={8}>
-            <CornerstoneViewer layers = {layer} renderScrollbar = {true}/>  
+            <CornerstoneViewer layers={layer} renderScrollbar={true} />
           </Col>
           <Col span={8}>
             <AisHousefieldUnitMean></AisHousefieldUnitMean>

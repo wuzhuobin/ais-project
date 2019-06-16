@@ -131,16 +131,16 @@ export default class CornerstoneViewer extends React.Component {
     );
   }
 
-  renderScrollbar(bool){
-    if (bool){
+  renderScrollbar(bool) {
+    if (bool) {
       return (<ImageScrollbar
-          onInputCallback={this.imageSliderOnInputCallback}
-          max= {this.state.numberOfSlices}
-          value={this.state.currentImageIdIndex}
-          height={this.state.viewportHeight}
-        />);
+        onInputCallback={this.imageSliderOnInputCallback}
+        max={this.state.numberOfSlices}
+        value={this.state.currentImageIdIndex}
+        height={this.state.viewportHeight}
+      />);
     }
-    else{
+    else {
       return null;
     }
 
