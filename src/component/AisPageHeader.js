@@ -18,7 +18,7 @@ export default withTranslation()(class AisPageHeader extends React.Component {
     const t = this.props.t;
     const AisLanguageButton =
       <Button onClick={() => this.onClickObserver()}>
-        {t('English')}
+        {t('中文')}
       </Button>
     return (
       <PageHeader title={<img src={BrainnowIcon}

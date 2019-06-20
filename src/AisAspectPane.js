@@ -11,9 +11,32 @@ import AppContext from './AppContext';
 // const { Header, Footer, Sider, Content} = Layout;
 
 export default class AisAspectPane extends React.Component {
+  GetUrlParam(paraName) {
+  var url = document.location.toString();
+  var arrObj = url.split("?");
+
+  if (arrObj.length > 1) {
+  　　var arrPara = arrObj[1].split("&");
+  　　var arr;
+
+  　　for (var i = 0; i < arrPara.length; i++) {
+    arr = arrPara[i].split("=");
+
+    if (arr != null && arr[0] == paraName) {
+    　　return arr[1];
+    }
+  　　}
+  　　return "";
+  }
+  else {
+  　　return "";
+  }
+}
+
+
   render() {
       const layer = [{
-                  imageId: 'nifti://' + window.location.hostname + '/NiftiData/image.nii.gz',
+                  imageId: 'nifti://' + "file.brainnow.net/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") +'/image.nii.gz',
 
                     options: {
                                name: 'CT',
@@ -22,7 +45,7 @@ export default class AisAspectPane extends React.Component {
                              }
                   },
                   {
-                    imageId: 'nifti://' + window.location.hostname + '/NiftiData/image-atlas-contour.nii.gz',
+                    imageId: 'nifti://' + "file.brainnow.net/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") +'/image-atlas-contour.nii.gz',
                     options: {
                                name: 'Label',
                                opacity: 1,
@@ -36,7 +59,7 @@ export default class AisAspectPane extends React.Component {
                               }
                   },
                   {
-                    imageId: 'nifti://' + window.location.hostname + '/NiftiData/image-ais.nii.gz',
+                    imageId: 'nifti://' + "file.brainnow.net/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") +'/image-ais.nii.gz',
                     options: {
                                name: 'Label2',
                                opacity: 0.4,

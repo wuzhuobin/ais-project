@@ -4,7 +4,7 @@
 	"Patient_Age" 				: "34",
 	"Patient_Gender" 			: "M",
 	"Scan_Time"		 			: "2019-5-14 11:32am",
-	"Affected_Side"		 		: "Left",
+	"Affected_Side"		 		: "L",
 	"ASPECT_Final_Score"		: "7",
 
 	"Loaded_Module":
@@ -41,7 +41,7 @@
 
 	"HU_Mean":
 	{
-		"L_Caudate"			: "32.5",
+		"_Caudate"			: "32.5",
 		"L_Insularribbon"	: "34.5",
 		"L_InternalCapsule"	: "32.4",
 		"L_LentiformNucleus": "37.5",

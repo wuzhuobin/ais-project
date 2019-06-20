@@ -1,5 +1,5 @@
 // node_modules
-import React from 'react';
+import React , {Component} from 'react';
 import 'antd/dist/antd.css';
 
 // me
@@ -7,10 +7,35 @@ import './App.css';
 import AisPageHeader from './component/AisPageHeader';
 import AisPatientInfo from './component/AisPatientInfo';
 import AisOnlineViewer from './AisOnlineViewer';
-//import InfoAisSample from './info_ais_sample.json';
+import InfoAisSample from './info_ais_sample.json';
 import AppContext from './AppContext';
 
-function GetUrlParam(paraName) {
+class App extends Component {
+  constructor() {
+    super();
+    this.state = { testContext: {infoAis: InfoAisSample, workingDir :""} };
+  }
+
+async componentWillMount() {
+ 	var user = this.GetUrlParam("user");
+	var path = this.GetUrlParam("path");
+
+	console.log(user)
+	console.log(path)
+
+	const currentDir = "http://file.brainnow.net/ais/" + user + "/" + path
+	const jsonPath   = "http://file.brainnow.net/ais/" + user + "/" + path + "/info_ais.json"
+	console.log(jsonPath)
+	
+
+	const json = await fetch(jsonPath)
+                .then(response => response.json());
+
+	this.setState({testContext : {infoAis: json, workingDir :currentDir}});
+	console.log(json)
+  }
+
+GetUrlParam(paraName) {
 	var url = document.location.toString();
 	var arrObj = url.split("?");
 
@@ -33,29 +58,9 @@ function GetUrlParam(paraName) {
 }
 
 
-function App() {
-	//const testContext = {infoAis: InfoAisSample};
-	//const context =  React.createContext()};
-	//console.log(context);
-
- 	var user = GetUrlParam("user");
-	var number = GetUrlParam("number");
-	var path = GetUrlParam("path");
-
-	console.log(user)
-	console.log(number)
-	console.log(path)
-
-	const currentDir = "/home/sharefolder/websiteFiles/Data/ProgramData/Dg/" + user + "/" + number + "/CT/" + path
-	const jsonPath   = require("/home/sharefolder/websiteFiles/Data/ProgramData/Dg/" + user + "/" + number + "/CT/" + path + "/info_ais.json")
-	console.log(jsonPath)
-
-	const testContext = {infoAis: jsonPath, workingDir :currentDir};
-	console.log(testContext)
-
-
+render() {
   return (
-    <div className="App"><AppContext.Provider value={testContext}>
+    <div className="App"><AppContext.Provider value={this.state.testContext}>
       <AisPageHeader></AisPageHeader>
       <AisPatientInfo></AisPatientInfo>
       <AisOnlineViewer></AisOnlineViewer>
@@ -63,7 +68,7 @@ function App() {
   );
 }
 
-
+}
 
 
 App.contexType = AppContext;
