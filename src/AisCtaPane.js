@@ -20,12 +20,14 @@ class AisCtaPane extends React.Component {
           tabPosition="bottom"
         >
           <Tabs.TabPane
+            className="TabPane"
             tab={t('Column View')}
             key="Column View"
           >
             <AisCtaColumnViewer></AisCtaColumnViewer>
           </Tabs.TabPane>
           <Tabs.TabPane
+            className="TabPane"
             tab={t('3D View')}
             key="3D View"
           >

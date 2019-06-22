@@ -10,23 +10,29 @@ class AisCtaColumnView extends React.Component {
     const t = this.props.t;
     return (
       <div className="AisCtaColumnView">
-        <Row>
-          <Col span={12}>
+        <Row className="Row" type="flex" justify="space-around" align="middle">
+          <Col span={6}>
             <img src="Data/i am jpg.jpg" alt="i am jpg"></img>
           </Col>
+          <Col span={6}>
             <img src="Data/i am jpg.jpg" alt="i am jpg"></img>
+          </Col>
         </Row>
-        <Row>
-          <Col span={12}>
+        <Row className="Row" type="flex" justify="space-around" align="middle">
+          <Col span={6}>
             <img src="Data/i am jpg.jpg" alt="i am jpg"></img>
           </Col>
+          <Col span={6}>
             <img src="Data/i am jpg.jpg" alt="i am jpg"></img>
+          </Col>
         </Row>
-        <Row>
-          <Col span={12}>
+        <Row className="Row" type="flex" justify="space-around" align="middle">
+          <Col span={6}>
             <img src="Data/i am jpg.jpg" alt="i am jpg"></img>
           </Col>
+          <Col span={6}>
             <img src="Data/i am jpg.jpg" alt="i am jpg"></img>
+          </Col>
         </Row>
       </div>
     );

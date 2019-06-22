@@ -1,0 +1,3 @@
+[submodule "src/component/react-cornerstone-viewport"]
+	path = src/component/react-cornerstone-viewport
+	url = https://github.com/cornerstonejs/react-cornerstone-viewport.git

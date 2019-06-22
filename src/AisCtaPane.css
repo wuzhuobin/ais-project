@@ -1,3 +1,7 @@
 .AisCtaPane {
   height: 100%;
 }
+
+.AisCtaPane .TabPane {
+  height: 75vh
+}

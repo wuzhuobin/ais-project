@@ -1,6 +1,7 @@
 import dicomParser from 'dicom-parser';
 import cornerstone from 'cornerstone-core';
 import cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
+import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader';
 import cornerstoneMath from 'cornerstone-math';
 import cornerstoneTools from 'cornerstone-tools';
 import Hammer from 'hammerjs';
@@ -10,6 +11,7 @@ cornerstoneTools.external.Hammer = Hammer;
 cornerstoneTools.external.cornerstoneMath = cornerstoneMath;
 
 cornerstoneTools.init();
+// cornerstoneTools.enableLogger();
 
 // Set the tool font and font size
 // context.font = "[style] [variant] [weight] [size]/[line height] [font family]";
@@ -48,3 +50,4 @@ cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
 
 cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
 cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
+cornerstoneNIFTIImageLoader.external.cornerstone = cornerstone;

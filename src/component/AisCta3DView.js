@@ -4,56 +4,30 @@ import { withTranslation } from 'react-i18next';
 //
 import './AisCta3DView.css';
 import AppContext from '../AppContext';
-import CornerstoneViewer from './ais-cornerstone-viewer';
+// import CornerstoneViewport from './react-cornerstone-viewport/src/CornerstoneViewport/CornerstoneViewport';
+import './ais-cornerstone/initCornerstone';
 
 class AisCta3DView extends React.Component {
-  // constructor(props) {
-
-  // }
+  constructor(props) {
+    super(props);
+  }
   render() {
-     const layer = [{
-      imageId: 'nifti://' + window.location.hostname + ':' + window.location.port + '/NiftiData/image.nii.gz',
 
-      options: {
-        name: 'CT',
-        opacity: 1,
-        viewport: { voi: { windowWidth: 80, windowCenter: 40 } }
-      }
-    },
-    {
-      imageId: 'nifti://' + window.location.hostname + ':' + window.location.port + '/NiftiData/image-atlas-contour.nii.gz',
-      options: {
-        name: 'Label',
-        opacity: 1,
-        viewport: {
-          colormap: 'myCustomColorMap1',
-          voi: {
-            windowWidth: 255,
-            windowCenter: 127.5
-          }
-        }
-      }
-    },
-    {
-      imageId: 'nifti://' + window.location.hostname + ':' + window.location.port + '/NiftiData/image-ais.nii.gz',
-      options: {
-        name: 'Label2',
-        opacity: 0.4,
-        viewport: {
-          colormap: 'myCustomColorMap2',
-          voi: {
-            windowWidth: 255,
-            windowCenter: 127.5
-          }
-        }
-      }
-    }];
-    const t = this.props.t;
     return (
       <div className="AisCta3DView">
-        <div>
-        <CornerstoneViewer layers={layer} renderScrollbar={true} />
-        </div>
+        {/* <CornerstoneViewport 
+          viewportData={
+            {
+              stack: {
+                currentImageIdIndex: 0,
+                imageIds: [
+                  "dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032220.11.dcm",
+                  "dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032220.12.dcm"
+                ],
+              }
+            }
+          }>
+        </CornerstoneViewport> */}
       </div>
     );
   }

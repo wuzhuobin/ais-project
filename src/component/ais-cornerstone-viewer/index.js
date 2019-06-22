@@ -287,17 +287,15 @@ export default class CornerstoneViewer extends React.Component {
     console.log("handleClick mouse: %O", e);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     cornerstoneTools.external.cornerstone = cornerstone;
     cornerstoneTools.external.cornerstoneMath = cornerstoneMath;
-    cornerstoneWebImageLoader.external.cornerstone = cornerstone;
     cornerstoneTools.external.Hammer = Hammer;
+    cornerstoneTools.init();
+    cornerstoneWebImageLoader.external.cornerstone = cornerstone;
     cornerstoneNIFTIImageLoader.external.cornerstone = cornerstone
     getCustomLookupTable1();
     getCustomLookupTable2();
-  }
-
-  componentDidMount() {
     const element = this.element;
     const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId;
     // const imageIdObject = ImageId.fromURL(this.state.imageId);
@@ -320,18 +318,23 @@ export default class CornerstoneViewer extends React.Component {
         };
         // const viewport = cornerstone.getDefaultViewportForImage(element, image);
         
-        if(loaded === false) {
+        // if(loaded === false) {
           cornerstoneTools.addStackStateManager(element, ['stack', 'wwwc', 'pan', 'zoom']);
-          cornerstoneTools.addToolState(element, 'stack', stack);         
-          cornerstoneTools.mouseInput.enable(element);
-          cornerstoneTools.mouseWheelInput.enable(element);
-          cornerstoneTools.wwwc.activate(element, 1);
-          cornerstoneTools.pan.activate(element, 2);
-          cornerstoneTools.zoom.activate(element, 4);
-          // cornerstoneTools.stackScrollWheel.activate(element);
-          cornerstoneTools.orientationMarkers.enable(element);
-          loaded = true;
-        }
+          cornerstoneTools.addToolState(element, 'stack', stack);
+          cornerstoneTools.addToolForElement(element, cornerstoneTools.StackScrollMouseWheelTool);
+          cornerstoneTools.setToolActive('StackScrollMouseWheel', {
+            mouseButtonMask: 0,
+            isTouchActive: true
+          });
+          // cornerstoneTools.mouseInput.enable(element);
+          // cornerstoneTools.mouseWheelInput.enable(element);
+          // cornerstoneTools.wwwc.activate(element, 1);
+          // cornerstoneTools.pan.activate(element, 2);
+          // cornerstoneTools.zoom.activate(element, 4);
+          // // cornerstoneTools.stackScrollWheel.activate(element);
+          // cornerstoneTools.orientationMarkers.enable(element);
+          // loaded = true;
+        // }
         /////////////////////
         
         console.log('Layer ' + index + ': ' + layerId);

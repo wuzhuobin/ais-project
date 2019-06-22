@@ -1,3 +1,7 @@
-.AisAspectPane.ant-row::before,.ant-row::after{
+.AisAspectPane.ant-row::before,.ant-row::after {
   display: none;
+}
+
+.AisAspectPane .CornerstoneLayerViewport {
+  height: 75vh;
 }
