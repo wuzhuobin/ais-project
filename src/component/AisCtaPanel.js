@@ -52,8 +52,8 @@ class AisCtaPanel extends React.Component {
             <td>
               <Button>|&lt;</Button>
             </td>
-            <td>
-              <Slider></Slider>
+            <td className="Slider">
+              <Slider min={0} max={100}></Slider>
             </td>
             <td>
               <Button>&gt;|</Button>

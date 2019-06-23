@@ -69,7 +69,8 @@ export default class AisAspectPane extends React.Component {
 
   render() {
     const layer = [{
-      imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image.nii.gz',
+      imageId: 'nifti://' + "file.brainnow.net/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image.nii.gz',
+      // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image.nii.gz',
       options: {
         name: 'CT',
         opacity: 1,
@@ -77,7 +78,8 @@ export default class AisAspectPane extends React.Component {
       }
     },
     {
-      imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image-atlas-contour.nii.gz',
+      imageId: 'nifti://' + "file.brainnow.net/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-atlas-contour.nii.gz',
+      // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image-atlas-contour.nii.gz',
       options: {
         name: 'Label',
         opacity: 1,
@@ -91,8 +93,8 @@ export default class AisAspectPane extends React.Component {
       }
     },
     {
-      // imageId: 'nifti://' + "file.brainnow.net/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz',
-      imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image-ais.nii.gz',
+      imageId: 'nifti://' + "file.brainnow.net/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz',
+      // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image-ais.nii.gz',
       options: {
         name: 'Label2',
         opacity: 0.4,
