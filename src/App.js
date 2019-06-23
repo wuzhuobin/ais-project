@@ -1,5 +1,5 @@
 // node_modules
-import React , {Component} from 'react';
+import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 
 //
@@ -11,62 +11,62 @@ import InfoAisSample from './info_ais_sample.json';
 import AppContext from './AppContext';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = { testContext: {infoAis: InfoAisSample, workingDir :""} };
-  }
+	constructor() {
+		super();
+		this.state = { testContext: { infoAis: InfoAisSample, workingDir: "" } };
+	}
 
-async componentWillMount() {
- 	var user = this.GetUrlParam("user");
-	var path = this.GetUrlParam("path");
+	async componentWillMount() {
+		var user = this.GetUrlParam("user");
+		var path = this.GetUrlParam("path");
 
-	console.log(user)
-	console.log(path)
+		console.log(user)
+		console.log(path)
 
-	const currentDir = "http://file.brainnow.net/ais/" + user + "/" + path
-	const jsonPath   = "http://file.brainnow.net/ais/" + user + "/" + path + "/info_ais.json"
-	console.log(jsonPath)
-	
+		const currentDir = "http://file.brainnow.net/ais/" + user + "/" + path
+		const jsonPath = "http://file.brainnow.net/ais/" + user + "/" + path + "/info_ais.json"
+		console.log(jsonPath)
 
-	const json = await fetch(jsonPath)
-                .then(response => response.json());
 
-	this.setState({testContext : {infoAis: json, workingDir :currentDir}});
-	console.log(json)
-  }
+		const json = await fetch(jsonPath)
+			.then(response => response.json());
 
-GetUrlParam(paraName) {
-	var url = document.location.toString();
-	var arrObj = url.split("?");
+		this.setState({ testContext: { infoAis: json, workingDir: currentDir } });
+		console.log(json)
+	}
 
-	if (arrObj.length > 1) {
-	　　var arrPara = arrObj[1].split("&");
-	　　var arr;
+	GetUrlParam(paraName) {
+		var url = document.location.toString();
+		var arrObj = url.split("?");
 
-	　　for (var i = 0; i < arrPara.length; i++) {
-		arr = arrPara[i].split("=");
+		if (arrObj.length > 1) {
+			var arrPara = arrObj[1].split("&");
+			var arr;
 
-		if (arr != null && arr[0] == paraName) {
-		　　return arr[1];
+			for (var i = 0; i < arrPara.length; i++) {
+				arr = arrPara[i].split("=");
+
+				if (arr != null && arr[0] == paraName) {
+					return arr[1];
+				}
+			}
+			return "";
 		}
-	　　}
-	　　return "";
+		else {
+			return "";
+		}
 	}
-	else {
-	　　return "";
-	}
-}
 
 
-render() {
-  return (
-    <div className="App"><AppContext.Provider value={this.state.testContext}>
-      <AisPageHeader></AisPageHeader>
-      <AisPatientInfo></AisPatientInfo>
-      <AisOnlineViewer></AisOnlineViewer>
-    </AppContext.Provider></div>
-  );
-}
+	render() {
+		return (
+			<div className="App"><AppContext.Provider value={this.state.testContext}>
+				<AisPageHeader></AisPageHeader>
+				<AisPatientInfo></AisPatientInfo>
+				<AisOnlineViewer></AisOnlineViewer>
+			</AppContext.Provider></div>
+		);
+	}
 
 }
 

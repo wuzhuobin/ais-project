@@ -187,7 +187,7 @@ class CornerstoneLayerViewport extends Component {
     };
 
     const getScrollbar = () => {
-      if (this.props.scrollbarFlaf === false || this.state.stack === null) {
+      if (this.props.scrollbarFlag === false || this.state.stack === null) {
         return null;
       }
       return (

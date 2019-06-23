@@ -12,7 +12,7 @@ export default class AisOnlineViewer extends React.Component {
   render() {
     return (
       <div className="AisOnlineViewer" >
-        <Tabs type='card' defaultActiveKey="ASPECT">
+        <Tabs type="card" defaultActiveKey="CTA">
           {
             this.context.infoAis.Loaded_Module.Report === 'True' ?
               <Tabs.TabPane tab="Report" key="Report" >

@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 //
 import './AisCta3DView.css';
 import AppContext from '../AppContext';
-// import CornerstoneViewport from './react-cornerstone-viewport/src/CornerstoneViewport/CornerstoneViewport';
+import CornerstoneViewport from 'react-cornerstone-viewport';
 import './ais-cornerstone/initCornerstone';
 
 class AisCta3DView extends React.Component {
@@ -15,7 +15,7 @@ class AisCta3DView extends React.Component {
 
     return (
       <div className="AisCta3DView">
-        {/* <CornerstoneViewport 
+        <CornerstoneViewport 
           viewportData={
             {
               stack: {
@@ -27,7 +27,7 @@ class AisCta3DView extends React.Component {
               }
             }
           }>
-        </CornerstoneViewport> */}
+        </CornerstoneViewport>
       </div>
     );
   }

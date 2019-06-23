@@ -11,7 +11,7 @@
 	{
 		"Report" 	: "False",
 		"ASPECT" 	: "True",
-		"CTA" 		: "False",
+		"CTA" 		: "True",
 		"Mismatch" 	: "False"
 	},
 
@@ -41,7 +41,7 @@
 
 	"HU_Mean":
 	{
-		"_Caudate"			: "32.5",
+		"L_Caudate"			: "32.5",
 		"L_Insularribbon"	: "34.5",
 		"L_InternalCapsule"	: "32.4",
 		"L_LentiformNucleus": "37.5",
