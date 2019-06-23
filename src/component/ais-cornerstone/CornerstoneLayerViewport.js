@@ -880,13 +880,22 @@ class CornerstoneLayerViewport extends Component {
     this.setViewportActive();
 
     scrollToIndex(this.element, value);
-
-    const stack = this.state.stack;
-    stack.currentImageIdIndex = value;
-
-    this.setState({
-      stack
+    const stacks = this.state.stacks.map((stack) => {
+      const stack_ = stack;
+      stack_.currentImageIdIndex = value;
+      return  stack_;
     });
+    this.setState({
+      stack: stacks[0],
+      stacks: stacks
+    });
+
+    // const stack = this.state.stack;
+    // stack.currentImageIdIndex = value;
+
+    // this.setState({
+    //   stack
+    // });
   };
 }
 
