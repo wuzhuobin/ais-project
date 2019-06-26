@@ -16,23 +16,22 @@ class AisCtaPane extends React.Component {
   render() {
     const t = this.props.t;
     return (
-      <Row>
+      <Row className="AisCtaPane"> 
         <Col span={16}>
           <Tabs
-            className="AisCtaPane"
             defaultActiveKey="Column View"
             tabPosition="bottom"
           >
             <Tabs.TabPane
               className="TabPane"
-              tab={t('Column View')}
+              tab={<span className="Tab">{t('Column View')}</span>}
               key="Column View"
             >
               <AisCtaColumnViewer></AisCtaColumnViewer>
             </Tabs.TabPane>
             <Tabs.TabPane
               className="TabPane"
-              tab={t('3D View')}
+              tab={<span className="Tab">{t('3D View')}</span>}
               key="3D View"
             >
               <Ais3DViewer></Ais3DViewer>

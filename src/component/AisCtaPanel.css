@@ -1,8 +1,15 @@
 .AisCtaPanel {
   height: 100%;
   width: 100%;
+  color: rgb(51, 74, 132);
+  font-weight: bold;
 }
 
-.AisCtaPanel table, .AisCtaPanel tr, .AisCtaPanel .Slider{
+.AisCtaPanel .SubTitle {
+  font-size: 20px;
+  height: 40px;
+}
+
+.AisCtaPanel .ant-btn {
   width: 100%;
 }

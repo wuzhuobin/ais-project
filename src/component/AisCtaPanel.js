@@ -3,7 +3,8 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { Button } from 'antd';
 import { Radio } from 'antd';
-import { Slider } from 'antd'
+import { Slider } from 'antd';
+import { Row, Col} from 'antd';
 //
 import './AisCtaPanel.css';
 import AppContext from '../AppContext';
@@ -18,51 +19,90 @@ class AisCtaPanel extends React.Component {
     const t = this.props.t;
     return (
       <div className="AisCtaPanel">
-        <span>{t('2D')}</span>
-        <div>
-          {t('Anterior Cerebral Artery')}(ACA):
-          <Button>{t('View')}</Button>
-        </div>
-        <div>
-          {t('Middle Cerebral Artery')}(MCA):
-          <Button>{t('View')}</Button>
-        </div>
-        <div>
-          {t('Posterior Cerebral Artery')}(PCA):
-          <Button>{t('View')}</Button>
-        </div>
-        <br/><br/><br/>
-        <span>{t('3D')}</span>
-        <div>
-          {t('Maximum Intensity Projection')}(MIP):
-          <Button>{t('View')}</Button>
-        </div>
-        <div>
-          {t('Inverse Maximum Intensity Projection')}(IMIP):
-          <Button>{t('View')}</Button>
-        </div>
-        <div>
-          {t('ROI')}:
+        <Row type="flex" align="middle">
+          <Col className="SubTitle" span={24}>
+            {t('2D')}
+          </Col>
+        </Row>
+        <Row type="flex" align="middle">
+          <Col span={16}>
+            {t('Anterior Cerebral Antery')}(ACA):
+          </Col>
+          <Col span={8}>
+            <Button>{t('View')}</Button>
+          </Col>
+        </Row>
+        <Row type="flex" align="middle">
+          <Col span={16}>
+            {t('Middle Cerebral Artery')}(MCA):
+          </Col>
+          <Col span={8}>
+            <Button>{t('View')}</Button>
+          </Col>
+        </Row>
+        <Row type="flex" align="middle">
+          <Col span={16}>
+            {t('Posterior Cerebral Artery')}(PCA):
+          </Col>
+          <Col span={8}>
+            <Button>{t('View')}</Button>
+          </Col>
+        </Row>
+        <Row type="flex" align="middle">
+          <Col className="SubTitle" span={24}>
+            {t('3D')}
+          </Col>
+        </Row>
+        <Row type="flex" align="middle">
+          <Col span={16}>
+            {t('Maximum Intensity Projection')}(MIP):
+          </Col>
+          <Col span={8}>
+            <Button>{t('View')}</Button>
+          </Col>
+        </Row>
+        <Row type="flex" align="middle">
+          <Col span={16}>
+            {t('Inverse Maximum Intensity Projection')}(IMIP):
+          </Col>
+          <Col span={8}>
+            <Button>{t('View')}</Button>
+          </Col>
+        </Row>
+        <Row type="flex" align="middle">
+          <Col span={24}>
+          </Col>
+        </Row>
+        <Row type="flex" align="middle">
           <Radio.Group>
-            <Radio>{t('Left Brain')}</Radio>
-            <Radio>{t('Both Brain')}</Radio>
-            <Radio>{t('Right Brain')}</Radio>
+            <Col span={2}>
+              {t('ROI')}:
+            </Col>
+            <Col span={7}>
+              <Radio>{t('Left Brain')}</Radio>
+            </Col>
+            <Col span={7}>
+              <Radio>{t('Both Brain')}</Radio>
+            </Col>
+            <Col span={7}>
+              <Radio>{t('Right Brain')}</Radio>
+            </Col>
           </Radio.Group>
-          <table><tbody><tr>
-            <td>
-              <Button>|&lt;</Button>
-            </td>
-            <td className="Slider">
-              <Slider min={0} max={100}></Slider>
-            </td>
-            <td>
-              <Button>&gt;|</Button>
-            </td>
-            <td>
-              <Button>&gt;</Button>
-            </td>
-          </tr></tbody></table>
-        </div>
+        </Row>
+        <Row type="flex" align="middle">
+          <Col span={3}>
+            <Button>|&lt;</Button>
+          </Col>
+          <Col span={15}>
+            <Slider min={0} max={100}></Slider>
+          </Col>
+          <Col span={3}>
+            <Button>&gt;|</Button>
+          </Col>
+          <Col span={3}>
+            <Button>&gt;</Button>
+          </Col>
+        </Row>
       </div>
     );
   }
