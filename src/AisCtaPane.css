@@ -2,8 +2,8 @@
   height: 100%;
 }
 
-.AisCtaPane .TabPane {
-  height: 70vh
+.AisCtaPane .Viewer {
+  height: 75vh
 }
 
 .AisCtaPane .ant-tabs-nav-scroll {
