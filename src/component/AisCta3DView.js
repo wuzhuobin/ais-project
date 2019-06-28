@@ -3,36 +3,54 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 //
 import './AisCta3DView.css';
+import PropTypes from 'prop-types';
 import AppContext from '../AppContext';
-import CornerstoneViewport from 'react-cornerstone-viewport';
-import './ais-cornerstone/initCornerstone';
 
 class AisCta3DView extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
-
+    let imagePath = [
+      this.props.imagePath, 
+      this.props.roi, 
+      this.props.imageName1
+    ].join('/');
+    imagePath = (this.props.invFlag ?
+      [imagePath, this.props.imageName2, this.props.index] : 
+      [imagePath, 'inv', this.props.imageName2, this.props.index]).join('_');
+    imagePath = imagePath + '.' + this.props.imageExtensionName;
     return (
       <div className="AisCta3DView">
-        <CornerstoneViewport 
-          viewportData={
-            {
-              stack: {
-                currentImageIdIndex: 0,
-                imageIds: [
-                  "dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032220.11.dcm",
-                  "dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032220.12.dcm"
-                ],
-              }
-            }
-          }>
-        </CornerstoneViewport>
+        <img className="Img" src={imagePath} alt={imagePath}></img>
       </div>
     );
   }
 }
-
 AisCta3DView.contextType = AppContext;
-
-export default withTranslation()(AisCta3DView);
+AisCta3DView.ROI = {
+  LEFT: 'left',
+  BOTH: 'both',
+  RIGHT: 'right',
+};
+AisCta3DView.defaultProps = {
+  imagePath: 'CTA_Output',
+  roi: AisCta3DView.ROI.LEFT,
+  imageName1: 'cta',
+  invFlag: false,
+  imageName2: 'mip',
+  index: 1,
+  imageExtensionName: 'png'
+};
+AisCta3DView.propTypes = {
+  imagePath: PropTypes.string,
+  roi: PropTypes.string,
+  imageName1: PropTypes.string,
+  invFlag: PropTypes.bool,
+  imageName2: PropTypes.string,
+  index: PropTypes.number,
+  imageExtensionName: PropTypes.string
+};
+const AisCta3DViewT = withTranslation()(AisCta3DView);
+AisCta3DViewT.ROI = AisCta3DView.ROI;
+export default AisCta3DViewT;
