@@ -28,8 +28,16 @@ const resources = {
       'C'  : '尾状核 (C)',
       'IC'  : '内囊 (IC)',
       'L'  : '豆状核 (L)',
-      'I'  : '岛叶皮质 (I)'
-    }
+      'I'  : '岛叶皮质 (I)',
+      'Left Brain' : '左脑',
+      'Both Brain' : '全脑',
+      'Right Brain' : '右脑',
+      'Middle Cerebral Artery' : '大脑中动脉',
+      'Anterior Cerebral Antery' : '大脑前动脉',
+      'Posterior Cerebral Antery' : '大脑后动脉',
+      'Maximum Intensity Projection' : '最大强度投影',
+      'Inverse Maximum Intensity Projection' : '反向最大强度投影'
+     }
   }
 };
 

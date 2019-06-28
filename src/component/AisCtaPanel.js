@@ -27,7 +27,7 @@ class AisCtaPanel extends React.Component {
         </Row>
         <Row type="flex" align="middle">
           <Col span={16}>
-            {t('Anterior Cerebral Antery')}(ACA):
+            {t('Anterior Cerebral Antery')} (ACA):
           </Col>
           <Col span={8}>
             <Button onClick={this.props.onClickListeners[0]}>
@@ -37,7 +37,7 @@ class AisCtaPanel extends React.Component {
         </Row>
         <Row type="flex" align="middle">
           <Col span={16}>
-            {t('Middle Cerebral Artery')}(MCA):
+            {t('Middle Cerebral Artery')} (MCA):
           </Col>
           <Col span={8}>
             <Button onClick={this.props.onClickListeners[1]}>
@@ -47,7 +47,7 @@ class AisCtaPanel extends React.Component {
         </Row>
         <Row type="flex" align="middle">
           <Col span={16}>
-            {t('Posterior Cerebral Artery')}(PCA):
+            {t('Posterior Cerebral Artery')} (PCA):
           </Col>
           <Col span={8}>
             <Button onClick={this.props.onClickListeners[2]}>
@@ -62,18 +62,18 @@ class AisCtaPanel extends React.Component {
         </Row>
         <Row type="flex" align="middle">
           <Col span={16}>
-            {t('Maximum Intensity Projection')}(MIP):
+            {t('Maximum Intensity Projection')} (MIP):
           </Col>
           <Col span={8}>
-            <Button onClick={this.props.onClickListeners[3]}>{t('View')}</Button>
+            <Button onClick={this.props.onClickListeners[4]}>{t('View')}</Button>
           </Col>
         </Row>
         <Row type="flex" align="middle">
           <Col span={16}>
-            {t('Inverse Maximum Intensity Projection')}(IMIP):
+            {t('Inverse Maximum Intensity Projection')} (IMIP):
           </Col>
           <Col span={8}>
-            <Button onClick={this.props.onClickListeners[4]}>{t('View')}</Button>
+            <Button onClick={this.props.onClickListeners[3]}>{t('View')}</Button>
           </Col>
         </Row>
         <Row type="flex" align="middle">
