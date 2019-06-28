@@ -3,12 +3,13 @@
 }
 
 .AisCtaPane .TabPane {
-  height: 70vh
+  height: 75vh
 }
 
 .AisCtaPane .ant-tabs-nav-scroll {
-  background-color: rgb(51, 74, 132);
+  /*background-color: rgb(51, 74, 132);*/
   color: white;
+  display:none;
 }
 
 .AisCtaPane .ant-tabs-bottom .ant-tabs-bottom-bar {

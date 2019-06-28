@@ -40,7 +40,7 @@ class AisHousefieldUnitMean extends React.Component {
          <br/>
          <br/>
          <br/>
-         <h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.context.infoAis.ASPECT_Final_Score}</h2>
+         {/*<h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.context.infoAis.ASPECT_Final_Score}</h2>"*/}
          <br/>
         </Layout.Footer>
       </Layout>

@@ -91,7 +91,7 @@ export default class AisAspectPane extends React.Component {
           }
         }
       }
-    },
+/*    },
     {
       imageId: 'nifti://' + "file.brainnow.net/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz',
       // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image-ais.nii.gz',
@@ -105,7 +105,7 @@ export default class AisAspectPane extends React.Component {
             windowCenter: 127.5
           }
         }
-      }
+      }*/
     }];
 
     // const layer1 = [{

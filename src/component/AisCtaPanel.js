@@ -79,13 +79,13 @@ class AisCtaPanel extends React.Component {
               {t('ROI')}:
             </Col>
             <Col span={7}>
-              <Radio>{t('Left Brain')}</Radio>
+              <Radio  value={0}> {t('Left Brain')}</Radio>
             </Col>
             <Col span={7}>
-              <Radio>{t('Both Brain')}</Radio>
+              <Radio  value={1}> {t('Both Brain')}</Radio>
             </Col>
             <Col span={7}>
-              <Radio>{t('Right Brain')}</Radio>
+              <Radio  value={2}> {t('Right Brain')}</Radio>
             </Col>
           </Radio.Group>
         </Row>
@@ -94,7 +94,7 @@ class AisCtaPanel extends React.Component {
             <Button>|&lt;</Button>
           </Col>
           <Col span={15}>
-            <Slider min={0} max={100}></Slider>
+            <Slider min={0} max={36}></Slider>
           </Col>
           <Col span={3}>
             <Button>&gt;|</Button>
