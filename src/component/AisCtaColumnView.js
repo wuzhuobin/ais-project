@@ -4,7 +4,8 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'antd';
 //
 import './AisCtaColumnView.css';
-import ColorBar from '../asset/color-bar.png';
+import ColorBarEn from '../asset/BloodVesselDensity.jpg';
+import ColorBarZh from '../asset/XueMiDu.jpg';
 import PropTypes from 'prop-types';
 
 class AisCtaColumnView extends React.Component {
@@ -79,33 +80,49 @@ class AisCtaColumnView extends React.Component {
         this.state.imagePrefix,
         AisCtaColumnView.ORIENTATION.RIGHT
       ].join('_') + '.' + this.props.imageExtensionName,
-    ]
+    ];
+    const ColorBars = {
+      BloodVesselDensity: ColorBarEn,
+      XueMiDu: ColorBarZh
+    };
     return (
       <div className="AisCtaColumnView">
         <Row className="Row" type="flex" justify="space-around" align="middle">
           <Col span={6}>
-            <img src={axial[0]} alt={axial[0]}></img>
+            <img className="BrainImg" src={axial[0]} alt={axial[0]}></img>
           </Col>
           <Col span={6}>
-            <img src={ColorBar} alt="ColorBar"></img>
-            <img src={axial[1]} alt={axial[1]}></img>
-          </Col>
-        </Row>
-        <Row className="Row" type="flex" justify="space-around" align="middle">
-          <Col span={6}>
-            <img src={coronal[0]} alt={coronal[0]}></img>
-          </Col>
-          <Col span={6}>
-            <img src={ColorBar} alt="ColorBar"></img>
-            <img src={coronal[1]} alt={coronal[1]}></img>
+            <Row>
+              <Col span={6}>
+                <img className="ColorBar" src={ColorBars[t('BloodVesselDensity')]} alt="ColorBar"></img>
+              </Col>
+              <Col span={18}>
+                <img className="BrainImg" src={axial[1]} alt={axial[1]}></img>
+              </Col>
+            </Row>
           </Col>
         </Row>
         <Row className="Row" type="flex" justify="space-around" align="middle">
           <Col span={6}>
-            <img src={leftRight[0]} alt={leftRight[0]}></img>
+            <img className="BrainImg" src={coronal[0]} alt={coronal[0]}></img>
           </Col>
           <Col span={6}>
-            <img src={leftRight[1]} alt={leftRight[1]}></img>
+            <Row>
+              <Col span={6}>
+                <img className="ColorBar" src={ColorBars[t('BloodVesselDensity')]} alt="ColorBar"></img>
+              </Col>
+              <Col span={18}>
+                <img className="BrainImg" src={coronal[1]} alt={coronal[1]}></img>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+        <Row className="Row" type="flex" justify="space-around" align="middle">
+          <Col span={6}>
+            <img className="BrainImg" src={leftRight[0]} alt={leftRight[0]}></img>
+          </Col>
+          <Col span={6}>
+            <img className="BrainImg" src={leftRight[1]} alt={leftRight[1]}></img>
           </Col>
         </Row>
       </div>

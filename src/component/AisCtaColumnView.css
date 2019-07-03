@@ -7,8 +7,13 @@
 .AisCtaColumnView .Row {
   height: 33%;
 }
-/* 
-.AisCtaColumnView .img {
-  margin-left: auto;
-  margin-right: auto;
-} */
+
+.AisCtaColumnView .BrainImg{
+  width: auto;
+  height: 25vh;
+}
+
+.AisCtaColumnView .ColorBar {
+  width: 100%;
+  height: 25vh;
+}

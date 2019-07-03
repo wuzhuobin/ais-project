@@ -36,7 +36,8 @@ const resources = {
       'Anterior Cerebral Antery' : '大脑前动脉',
       'Posterior Cerebral Antery' : '大脑后动脉',
       'Maximum Intensity Projection' : '最大强度投影',
-      'Inverse Maximum Intensity Projection' : '反向最大强度投影'
+      'Inverse Maximum Intensity Projection' : '反向最大强度投影',
+      'BloodVesselDensity': 'XueMiDu'
      }
   }
 };
