@@ -84,7 +84,7 @@ class AisCtaPane extends React.Component {
     this.setState({
       columnViewFlag: false,
       invFlag: invFlag,
-      range3d: invFlag ? [0, 36] : [0, 5]
+      range3d: invFlag ? [0, 35] : [0, 5]
     });
   }
 

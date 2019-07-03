@@ -8,40 +8,75 @@ import ColorBar from '../asset/color-bar.png';
 import PropTypes from 'prop-types';
 
 class AisCtaColumnView extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      imagePrefix: "",
+    };
+  }
+  GetUrlParam(paraName) {
+    var url = document.location.toString();
+    var arrObj = url.split("?");
+
+    if (arrObj.length > 1) {
+      var arrPara = arrObj[1].split("&");
+      var arr;
+
+      for (var i = 0; i < arrPara.length; i++) {
+        arr = arrPara[i].split("=");
+
+        if (arr != null && arr[0] == paraName) {
+          return arr[1];
+        }
+      }
+      return "";
+    }
+    else {
+      return "";
+    }
+  }
+
+  componentWillMount() {
+    var user = this.GetUrlParam("user");
+    var path = this.GetUrlParam("path");
+
+    console.log(user)
+    console.log(path)
+
+    const currentDir = "http://file.brainnow.net/ais/" + user + "/" + path
+    this.setState({ imagePrefix: currentDir + "/2D_MIP" });
+  }
   render() {
     const t = this.props.t;
     const axial = [
       [
-        this.props.imagePrefix,
+        this.state.imagePrefix,
         AisCtaColumnView.ORIENTATION.AXIAL
       ].join('_') + '.' + this.props.imageExtensionName,
       [
-        this.props.imagePrefix,
+        this.state.imagePrefix,
         AisCtaColumnView.ORIENTATION.AXIAL,
         this.props.imagePosition,
       ].join('_') + '.' + this.props.imageExtensionName
     ];
     const coronal = [
       [
-        this.props.imagePrefix,
+        this.state.imagePrefix,
         AisCtaColumnView.ORIENTATION.CORONAL,
       ].join('_') + '.' + this.props.imageExtensionName,
       [
-        this.props.imagePrefix,
+        this.state.imagePrefix,
         AisCtaColumnView.ORIENTATION.CORONAL,
         this.props.imagePosition,
       ].join('_') + '.' + this.props.imageExtensionName
     ];
     const leftRight = [
       [
-        this.props.imagePrefix,
+        this.state.imagePrefix,
         AisCtaColumnView.ORIENTATION.LEFT
       ].join('_') + '.' + this.props.imageExtensionName,
       [
-        this.props.imagePrefix,
+        this.state.imagePrefix,
         AisCtaColumnView.ORIENTATION.RIGHT
       ].join('_') + '.' + this.props.imageExtensionName,
     ]

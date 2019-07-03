@@ -9,10 +9,41 @@ import AppContext from '../AppContext';
 class AisCta3DView extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      imagePath: "",
+    };
+  }
+  GetUrlParam(paraName) {
+    var url = document.location.toString();
+    var arrObj = url.split("?");
+
+    if (arrObj.length > 1) {
+      var arrPara = arrObj[1].split("&");
+      var arr;
+
+      for (var i = 0; i < arrPara.length; i++) {
+        arr = arrPara[i].split("=");
+
+        if (arr != null && arr[0] == paraName) {
+          return arr[1];
+        }
+      }
+      return "";
+    }
+    else {
+      return "";
+    }
+  }
+
+  componentWillMount() {
+    var user = this.GetUrlParam("user");
+    var path = this.GetUrlParam("path");
+    const currentDir = "http://file.brainnow.net/ais/" + user + "/" + path
+    this.setState({ imagePath: currentDir + "/CTA_Output" });
   }
   render() {
     let imagePath = [
-      this.props.imagePath, 
+      this.state.imagePath, 
       this.props.roi, 
       this.props.imageName1
     ].join('/');
