@@ -88,6 +88,7 @@ class AisCtaColumnView extends React.Component {
     return (
       <div className="AisCtaColumnView">
         <Row className="Row" type="flex" justify="space-around" align="middle">
+          <Col span={6}></Col>
           <Col span={6}>
             <img className="BrainImg" src={axial[0]} alt={axial[0]}></img>
           </Col>
@@ -101,8 +102,10 @@ class AisCtaColumnView extends React.Component {
               </Col>
             </Row>
           </Col>
+          <Col span={6}></Col>
         </Row>
         <Row className="Row" type="flex" justify="space-around" align="middle">
+          <Col span={6}></Col>
           <Col span={6}>
             <img className="BrainImg" src={coronal[0]} alt={coronal[0]}></img>
           </Col>
@@ -116,14 +119,23 @@ class AisCtaColumnView extends React.Component {
               </Col>
             </Row>
           </Col>
+          <Col span={6}></Col>
         </Row>
         <Row className="Row" type="flex" justify="space-around" align="middle">
+          <Col span={6}></Col>
           <Col span={6}>
             <img className="BrainImg" src={leftRight[0]} alt={leftRight[0]}></img>
           </Col>
           <Col span={6}>
-            <img className="BrainImg" src={leftRight[1]} alt={leftRight[1]}></img>
+            <Row>
+              <Col span={6}>
+              </Col>
+              <Col span={18}>
+                <img className="BrainImg" src={leftRight[1]} alt={leftRight[1]}></img>
+              </Col>
+            </Row>
           </Col>
+          <Col span={6}></Col>
         </Row>
       </div>
     );
@@ -131,7 +143,7 @@ class AisCtaColumnView extends React.Component {
 }
 AisCtaColumnView.POSITION = {
   ANTERIOR: 'ACA',
-  MIDDLE: 'MCA', 
+  MIDDLE: 'MCA',
   POSTERIOR: 'PCA'
 }
 AisCtaColumnView.ORIENTATION = {
