@@ -127,7 +127,7 @@ AisCtaPanel.defaultProps = {
   onClickListeners: null,
   onChangeListenerRoi: null,
   onChangeListenerIndex3d: null,
-  roi: AisCta3DView.ROI.LEFT,
+  roi: AisCta3DView.ROI.BOTH,
   range3d: [0, 5],
   index3d: 0
 }

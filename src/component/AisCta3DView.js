@@ -66,7 +66,7 @@ AisCta3DView.ROI = {
 };
 AisCta3DView.defaultProps = {
   imagePath: 'CTA_Output',
-  roi: AisCta3DView.ROI.LEFT,
+  roi: AisCta3DView.ROI.BOTH,
   imageName1: 'cta',
   invFlag: false,
   imageName2: 'mip',

@@ -122,7 +122,7 @@ class AisCtaPane extends React.Component {
         this.setState({
           index3d: index
         });
-      }, 500);
+      }, 200);
     }
   }
 
