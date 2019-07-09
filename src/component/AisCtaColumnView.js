@@ -11,131 +11,49 @@ import PropTypes from 'prop-types';
 class AisCtaColumnView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      imagePrefix: "",
-    };
-  }
-  GetUrlParam(paraName) {
-    var url = document.location.toString();
-    var arrObj = url.split("?");
-
-    if (arrObj.length > 1) {
-      var arrPara = arrObj[1].split("&");
-      var arr;
-
-      for (var i = 0; i < arrPara.length; i++) {
-        arr = arrPara[i].split("=");
-
-        if (arr != null && arr[0] == paraName) {
-          return arr[1];
-        }
-      }
-      return "";
-    }
-    else {
-      return "";
-    }
   }
 
-  componentWillMount() {
-    var user = this.GetUrlParam("user");
-    var path = this.GetUrlParam("path");
-
-    console.log(user)
-    console.log(path)
-
-    const currentDir = "http://file.brainnow.net/ais/" + user + "/" + path
-    this.setState({ imagePrefix: currentDir + "/2D_MIP" });
-  }
   render() {
     const t = this.props.t;
-    const axial = [
-      [
-        this.state.imagePrefix,
-        AisCtaColumnView.ORIENTATION.AXIAL
-      ].join('_') + '.' + this.props.imageExtensionName,
-      [
-        this.state.imagePrefix,
-        AisCtaColumnView.ORIENTATION.AXIAL,
-        this.props.imagePosition,
-      ].join('_') + '.' + this.props.imageExtensionName
-    ];
-    const coronal = [
-      [
-        this.state.imagePrefix,
-        AisCtaColumnView.ORIENTATION.CORONAL,
-      ].join('_') + '.' + this.props.imageExtensionName,
-      [
-        this.state.imagePrefix,
-        AisCtaColumnView.ORIENTATION.CORONAL,
-        this.props.imagePosition,
-      ].join('_') + '.' + this.props.imageExtensionName
-    ];
-    const leftRight = [
-      [
-        this.state.imagePrefix,
-        AisCtaColumnView.ORIENTATION.LEFT
-      ].join('_') + '.' + this.props.imageExtensionName,
-      [
-        this.state.imagePrefix,
-        AisCtaColumnView.ORIENTATION.RIGHT
-      ].join('_') + '.' + this.props.imageExtensionName,
-    ];
+
+    const images = ['', ''];
+    if(this.props.imageOrientation === AisCtaColumnView.ORIENTATION.SAGITTAL) {
+      images[0] = [
+        this.props.imagePrefix,
+        AisCtaColumnView.POSITION.LEFT,
+      ].join('_') + '.' + this.props.imageExtensionName;
+      images[1] = [
+        this.props.imagePrefix,
+        AisCtaColumnView.POSITION.RIGHT,
+      ].join('_') + '.' + this.props.imageExtensionName;
+    }
+    else {
+      images[0] = [
+        this.props.imagePrefix,
+        this.props.imageOrientation,
+      ].join('_') + '.' + this.props.imageExtensionName;
+      images[1] = [
+        this.props.imagePrefix,
+        this.props.imageOrientation,
+        this.props.imagePosition
+      ].join('_') + '.' + this.props.imageExtensionName;
+    }
     const ColorBars = {
       BloodVesselDensity: ColorBarEn,
       XueMiDu: ColorBarZh
     };
     return (
       <div className="AisCtaColumnView">
-        <Row className="Row" type="flex" justify="space-around" align="middle">
-          <Col span={6}></Col>
-          <Col span={6}>
-            <img className="BrainImg" src={axial[0]} alt={axial[0]}></img>
+        <Row className="Row" type="flex" align="middle">
+          <Col className="Col" span={11}>
+            <img className="BrainImg" src={images[0]} alt={images[0]}></img>
           </Col>
-          <Col span={6}>
-            <Row>
-              <Col span={6}>
-                <img className="ColorBar" src={ColorBars[t('BloodVesselDensity')]} alt="ColorBar"></img>
-              </Col>
-              <Col span={18}>
-                <img className="BrainImg" src={axial[1]} alt={axial[1]}></img>
-              </Col>
-            </Row>
+          <Col className="Col" span={2}>
+            <img className="ColorBar" src={ColorBars[t('BloodVesselDensity')]} alt="ColorBar"></img>
           </Col>
-          <Col span={6}></Col>
-        </Row>
-        <Row className="Row" type="flex" justify="space-around" align="middle">
-          <Col span={6}></Col>
-          <Col span={6}>
-            <img className="BrainImg" src={coronal[0]} alt={coronal[0]}></img>
+          <Col className="Col" span={11}>
+            <img className="BrainImg" src={images[1]} alt={images[1]}></img>
           </Col>
-          <Col span={6}>
-            <Row>
-              <Col span={6}>
-                <img className="ColorBar" src={ColorBars[t('BloodVesselDensity')]} alt="ColorBar"></img>
-              </Col>
-              <Col span={18}>
-                <img className="BrainImg" src={coronal[1]} alt={coronal[1]}></img>
-              </Col>
-            </Row>
-          </Col>
-          <Col span={6}></Col>
-        </Row>
-        <Row className="Row" type="flex" justify="space-around" align="middle">
-          <Col span={6}></Col>
-          <Col span={6}>
-            <img className="BrainImg" src={leftRight[0]} alt={leftRight[0]}></img>
-          </Col>
-          <Col span={6}>
-            <Row>
-              <Col span={6}>
-              </Col>
-              <Col span={18}>
-                <img className="BrainImg" src={leftRight[1]} alt={leftRight[1]}></img>
-              </Col>
-            </Row>
-          </Col>
-          <Col span={6}></Col>
         </Row>
       </div>
     );
@@ -144,21 +62,24 @@ class AisCtaColumnView extends React.Component {
 AisCtaColumnView.POSITION = {
   ANTERIOR: 'ACA',
   MIDDLE: 'MCA',
-  POSTERIOR: 'PCA'
+  POSTERIOR: 'PCA',
+  LEFT: 'Left',
+  RIGHT: 'Right',
 }
 AisCtaColumnView.ORIENTATION = {
   AXIAL: 'Axial',
   CORONAL: 'Coronal',
-  LEFT: 'Left',
-  RIGHT: 'Right'
+  SAGITTAL: 'Sagittal',
 };
 AisCtaColumnView.propTyps = {
   imagePrefix: PropTypes.string,
+  imageOrientation: PropTypes.string,
   imagePosition: PropTypes.string,
   imageExtensionName: PropTypes.string,
 };
 AisCtaColumnView.defaultProps = {
   imagePrefix: '2D_MIP',
+  imageOrientation: AisCtaColumnView.ORIENTATION.AXIAL,
   imagePosition: AisCtaColumnView.POSITION.MIDDLE,
   imageExtensionName: 'png',
 };

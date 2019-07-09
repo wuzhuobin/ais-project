@@ -1,9 +1,9 @@
 .AisCtaPane {
-  height: 100%;
+  height: 75vh;
 }
 
-.AisCtaPane .Viewer {
-  height: 75vh
+.AisCtaPane .Sider {
+  background-color: black;
 }
 
 .AisCtaPane .ant-tabs-nav-scroll {

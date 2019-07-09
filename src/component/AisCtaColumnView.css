@@ -1,19 +1,25 @@
-.AisCtaColumnView {
+.AisCtaColumnView, .AisCtaColumnView .Row, .AisCtaColumnView .Col{
   color: white;
   background-color: black;
   height: 100%;
 }
-
-.AisCtaColumnView .Row {
-  height: 33%;
+.AisCtaColumnView .BrainImg 
+{
+  height: 100%;
+  width: auto;
 }
-
+.AisCtaColumnView, .ColorBar
+{
+  height: 100%;
+  width: 100%;
+}
+/* 
 .AisCtaColumnView .BrainImg{
   width: auto;
-  height: 25vh;
+  height: 100%;
 }
 
 .AisCtaColumnView .ColorBar {
   width: 100%;
-  height: 25vh;
-}
+  height: 100%;
+} */
