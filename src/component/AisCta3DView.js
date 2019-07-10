@@ -9,47 +9,17 @@ import AppContext from '../AppContext';
 class AisCta3DView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      imagePath: "",
-    };
-  }
-  GetUrlParam(paraName) {
-    var url = document.location.toString();
-    var arrObj = url.split("?");
-
-    if (arrObj.length > 1) {
-      var arrPara = arrObj[1].split("&");
-      var arr;
-
-      for (var i = 0; i < arrPara.length; i++) {
-        arr = arrPara[i].split("=");
-
-        if (arr != null && arr[0] == paraName) {
-          return arr[1];
-        }
-      }
-      return "";
-    }
-    else {
-      return "";
-    }
   }
 
-  componentWillMount() {
-    var user = this.GetUrlParam("user");
-    var path = this.GetUrlParam("path");
-    const currentDir = "http://file.brainnow.net/ais/" + user + "/" + path
-    this.setState({ imagePath: currentDir + "/CTA_Output" });
-  }
   render() {
     let imagePath = [
-      this.state.imagePath, 
+      this.props.imagePrefix, 
       this.props.roi, 
       this.props.imageName1
     ].join('/');
     imagePath = (this.props.invFlag ?
-      [imagePath, this.props.imageName2, this.props.index] : 
-      [imagePath, 'inv', this.props.imageName2, this.props.index]).join('_');
+      [imagePath, 'inv', this.props.imageName2, this.props.index] :
+      [imagePath, this.props.imageName2, this.props.index]).join('_');
     imagePath = imagePath + '.' + this.props.imageExtensionName;
     return (
       <div className="AisCta3DView">
@@ -65,7 +35,7 @@ AisCta3DView.ROI = {
   RIGHT: 'right',
 };
 AisCta3DView.defaultProps = {
-  imagePath: 'CTA_Output',
+  imagePrefix: 'CTA_Output',
   roi: AisCta3DView.ROI.BOTH,
   imageName1: 'cta',
   invFlag: false,
@@ -74,7 +44,7 @@ AisCta3DView.defaultProps = {
   imageExtensionName: 'png'
 };
 AisCta3DView.propTypes = {
-  imagePath: PropTypes.string,
+  imagePrefix: PropTypes.string,
   roi: PropTypes.string,
   imageName1: PropTypes.string,
   invFlag: PropTypes.bool,

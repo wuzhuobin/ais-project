@@ -1,7 +1,5 @@
 // node_modules
 import React from 'react';
-// import { Tabs } from 'antd';
-// import { Row, Col } from 'antd';
 import { Layout } from 'antd';
 import { Menu } from 'antd';
 import { Button } from 'antd';
@@ -10,7 +8,9 @@ import { withTranslation } from 'react-i18next';
 import './AisCtaPane.css';
 import AisCtaColumnViewer from './component/AisCtaColumnView';
 import Ais3DViewer from './component/AisCta3DView';
-// import AisCtaPanel from './component/AisCtaPanel';
+import BothHemisphere from './asset/icon_3D_BothHemisphere.png';
+import LeftHemisphere from './asset/icon_3D_LeftHemisphere.png';
+import RightHemisphere from './asset/icon_3D_RightHemisphere.png';
 
 class AisCtaPane extends React.Component {
   constructor(props) {
@@ -20,9 +20,9 @@ class AisCtaPane extends React.Component {
       columnViewPrefix: '',
       columnViewOrientation: AisCtaColumnViewer.ORIENTATION.AXIAL,
       columnViewPosition: AisCtaColumnViewer.POSITION.ANTERIOR,
-      position: AisCtaColumnViewer.POSITION.MIDDLE,
-      roi: Ais3DViewer.ROI.LEFT,
-      invFlag: true,
+      _3DViewPrefix: '',
+      _3DViewRoi: Ais3DViewer.ROI.BOTH,
+      _3DInvFlag: true,
       range3d: [0, 5],
       index3d: 0,
     };
@@ -50,33 +50,26 @@ class AisCtaPane extends React.Component {
     }
   }
   componentWillMount() {
-    var user = this.GetUrlParam("user");
-    var path = this.GetUrlParam("path");
+    var user = this.GetUrlParam('user');
+    var path = this.GetUrlParam('path');
 
     console.log(user)
     console.log(path)
 
-    const currentDir = "http://file.brainnow.net/ais/" + user + "/" + path
-    this.setState({ columnViewPrefix: currentDir + "/2D_MIP" });
+    const currentDir = 'http://file.brainnow.net/ais/' + user + '/' + path
+    this.setState({ 
+      columnViewPrefix: currentDir + '/2D_MIP',
+      _3DViewPrefix: currentDir + '/CTA_Output'
+     });
   }
   render() {
     const t = this.props.t;
-    // const roiIndex = () => {
-    //   if(this.state.roi === Ais3DViewer.ROI.LEFT) {
-    //     return 0;
-    //   }
-    //   else if (this.state.roi === Ais3DViewer.ROI.BOTH) {
-    //     return 1;
-    //   }
-    //   else {
-    //     return 2;
-    //   }
-    // };
     return (
       <Layout className="AisCtaPane">
         <Layout.Sider className="Sider">
           <Menu
             mode="inline"
+            inlineIndent={0}
             defaultSelectedKeys={[[AisCtaColumnViewer.ORIENTATION.AXIAL, AisCtaColumnViewer.POSITION.ANTERIOR].join(' ')]}
             defaultOpenKeys={[AisCtaColumnViewer.ORIENTATION.AXIAL]}
             onClick={this.onClickListenerMenu.bind(this)}
@@ -107,87 +100,60 @@ class AisCtaPane extends React.Component {
               {t('Sagittal')}
             </Menu.Item>
             <Menu.SubMenu title={t('3D View')}>
-              <Menu.Item>
-                <Button>
-                  {/* {t('Left Brain')} */}
-                </Button>
-                <Button>
-                  {/* {t('Both Brain')} */}
-                </Button>
-                <Button>
-                  {/* {t('Right Brain')} */}
-                </Button>
+              <Menu.Item key="3D View">
+                <Button.Group className="Hemisphere">
+                  <Button onClick={this.onClickListenerButton.bind(this, Ais3DViewer.ROI.LEFT)}>
+                    <img src={BothHemisphere} alt={BothHemisphere}></img>
+                  </Button>
+                  <Button onClick={this.onClickListenerButton.bind(this, Ais3DViewer.ROI.BOTH)}>
+                    <img src={LeftHemisphere} alt={LeftHemisphere}></img>
+                  </Button>
+                  <Button onClick={this.onClickListenerButton.bind(this, Ais3DViewer.ROI.RIGHT)}>
+                    <img src={RightHemisphere} alt={RightHemisphere}></img>
+                  </Button>
+                </Button.Group>
               </Menu.Item>
             </Menu.SubMenu>
           </Menu>
         </Layout.Sider>
         <Layout.Content>
-          <AisCtaColumnViewer
-            imagePrefix={this.state.columnViewPrefix}
-            imageOrientation={this.state.columnViewOrientation}
-            imagePosition={this.state.columnViewPosition}
-          ></AisCtaColumnViewer>
+          {
+            this.state.columnViewFlag ?
+              <AisCtaColumnViewer
+                imagePrefix={this.state.columnViewPrefix}
+                imageOrientation={this.state.columnViewOrientation}
+                imagePosition={this.state.columnViewPosition}
+              ></AisCtaColumnViewer> :
+              <Ais3DViewer
+                imagePrefix={this.state._3DViewPrefix}
+                roi={this.state._3DViewRoi}
+              ></Ais3DViewer>
+          }
         </Layout.Content>
       </Layout>
-      // <Row className="AisCtaPane"> 
-      //   <Col className="Viewer" span={16}>
-      //     {
-      //       this.state.columnViewFlag ?
-      //         <AisCtaColumnViewer
-      //           imagePosition={this.state.position}
-      //         >
-      //         </AisCtaColumnViewer> :
-      //         <Ais3DViewer
-      //           invFlag={this.state.invFlag}
-      //           roi={this.state.roi}
-      //           index={this.state.index3d}
-      //         ></Ais3DViewer>
-      //     }
-      //   </Col>
-      //   <Col span={8}>
-      //     <AisCtaPanel
-      //       onClickListeners={[
-      //         this.onClickListenerColumnView.bind(this, AisCtaColumnViewer.POSITION.ANTERIOR),
-      //         this.onClickListenerColumnView.bind(this, AisCtaColumnViewer.POSITION.MIDDLE),
-      //         this.onClickListenerColumnView.bind(this, AisCtaColumnViewer.POSITION.POSTERIOR),
-      //         this.onClickListener3DViewer.bind(this, false),
-      //         this.onClickListener3DViewer.bind(this, true),
-      //         this.onClickListenerPrevious.bind(this),
-      //         this.onClickListenerNext.bind(this),
-      //         this.onClickListenerPlay.bind(this)
-      //       ]}
-      //       onChangeListenerRoi={this.onChangeListenerRoi.bind(this)}
-      //       onChangeListenerIndex3d={this.onChangeListenerIndex3d.bind(this)}
-      //       roi={this.state.roi}
-      //       range3d={this.state.range3d}
-      //       index3d={this.state.index3d}
-      //     ></AisCtaPanel>
-      //   </Col>
-      // </Row>
+
     );
   }
   onClickListenerMenu(item) {
+    if(item.key === '3D View') {
+      return;
+    }
     const imageOrientation = item.key.split(' ')[0];
     const imagePosition = item.key.split(' ')[1];
     this.setState({
+      columnViewFlag: true,
       columnViewOrientation: imageOrientation,
       columnViewPosition: imagePosition
     });
+    // console.log(item);
   }
 
-  onClickListenerColumnView(position) {
-    this.setState({
-      columnViewFlag: true,
-      position: position
-    });
-  }
-
-  onClickListener3DViewer(invFlag) {
+  onClickListenerButton(roi) {
     this.setState({
       columnViewFlag: false,
-      invFlag: invFlag,
-      range3d: invFlag ? [0, 35] : [0, 5]
+      _3DViewRoi: roi,
     });
+    // console.log(event);
   }
 
   onClickListenerPrevious() {
@@ -226,18 +192,6 @@ class AisCtaPane extends React.Component {
         });
       }, 200);
     }
-  }
-
-  onChangeListenerIndex3d(value) {
-    this.setState({
-      index3d: value
-    });
-  }
-
-  onChangeListenerRoi = e => {
-    this.setState({
-      roi:e.target.value
-    });
   }
 }
 

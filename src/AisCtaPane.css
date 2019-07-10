@@ -16,3 +16,11 @@
   margin-top: 0;
   border-top: 0;
 }
+
+.AisCtaPane .Hemisphere {
+  height: 30px;
+}
+
+.AisCtaPane .Hemisphere img {
+  height: 100%;
+}
