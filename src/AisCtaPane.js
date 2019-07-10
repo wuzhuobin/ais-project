@@ -103,10 +103,10 @@ class AisCtaPane extends React.Component {
               <Menu.Item key="3D View">
                 <Button.Group className="Hemisphere">
                   <Button onClick={this.onClickListenerButton.bind(this, Ais3DViewer.ROI.LEFT)}>
-                    <img src={BothHemisphere} alt={BothHemisphere}></img>
+                    <img src={LeftHemisphere} alt={LeftHemisphere}></img>
                   </Button>
                   <Button onClick={this.onClickListenerButton.bind(this, Ais3DViewer.ROI.BOTH)}>
-                    <img src={LeftHemisphere} alt={LeftHemisphere}></img>
+                    <img src={BothHemisphere} alt={BothHemisphere}></img>
                   </Button>
                   <Button onClick={this.onClickListenerButton.bind(this, Ais3DViewer.ROI.RIGHT)}>
                     <img src={RightHemisphere} alt={RightHemisphere}></img>
