@@ -19,7 +19,7 @@ class AisCtaPane extends React.Component {
       columnViewFlag: true,
       columnViewPrefix: '',
       columnViewOrientation: AisCtaColumnViewer.ORIENTATION.AXIAL,
-      columnViewPosition: AisCtaColumnViewer.POSITION.ACA,
+      columnViewPosition: AisCtaColumnViewer.POSITION.ANTERIOR,
       position: AisCtaColumnViewer.POSITION.MIDDLE,
       roi: Ais3DViewer.ROI.LEFT,
       invFlag: true,
@@ -77,32 +77,33 @@ class AisCtaPane extends React.Component {
         <Layout.Sider className="Sider">
           <Menu
             mode="inline"
-            defaultSelectedKeys={['axialAca']}
-            defaultOpenKeys={['axial']}
+            defaultSelectedKeys={[[AisCtaColumnViewer.ORIENTATION.AXIAL, AisCtaColumnViewer.POSITION.ANTERIOR].join(' ')]}
+            defaultOpenKeys={[AisCtaColumnViewer.ORIENTATION.AXIAL]}
+            onClick={this.onClickListenerMenu.bind(this)}
           >
-            <Menu.SubMenu title={t('Axial')} key="axial">
-              <Menu.Item key="axialAca">
+            <Menu.SubMenu title={t('Axial')} key={AisCtaColumnViewer.ORIENTATION.AXIAL}>
+              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.AXIAL, AisCtaColumnViewer.POSITION.ANTERIOR].join(' ')}>
                 {t('ACA')}
               </Menu.Item>
-              <Menu.Item key="axialMca">
+              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.AXIAL, AisCtaColumnViewer.POSITION.MIDDLE].join(' ')}>
                 {t('MCA')}
               </Menu.Item>
-              <Menu.Item key="axialPca">
+              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.AXIAL, AisCtaColumnViewer.POSITION.POSTERIOR].join(' ')}>
                 {t('PCA')}
               </Menu.Item>
             </Menu.SubMenu>
-            <Menu.SubMenu title={t('Coronal')} key="coronal">
-              <Menu.Item key="CoronalAca">
+            <Menu.SubMenu title={t('Coronal')} key={AisCtaColumnViewer.ORIENTATION.CORONAL}>
+              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.CORONAL, AisCtaColumnViewer.POSITION.ANTERIOR].join(' ')}>
                 {t('ACA')}
               </Menu.Item>
-              <Menu.Item key="CoronalMca">
+              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.CORONAL, AisCtaColumnViewer.POSITION.MIDDLE].join(' ')}>
                 {t('MCA')}
               </Menu.Item>
-              <Menu.Item key="CoronalPca">
+              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.CORONAL, AisCtaColumnViewer.POSITION.POSTERIOR].join(' ')}>
                 {t('PCA')}
               </Menu.Item>
             </Menu.SubMenu>
-            <Menu.Item>
+            <Menu.Item key={AisCtaColumnViewer.ORIENTATION.SAGITTAL}>
               {t('Sagittal')}
             </Menu.Item>
             <Menu.SubMenu title={t('3D View')}>
@@ -165,6 +166,15 @@ class AisCtaPane extends React.Component {
       // </Row>
     );
   }
+  onClickListenerMenu(item) {
+    const imageOrientation = item.key.split(' ')[0];
+    const imagePosition = item.key.split(' ')[1];
+    this.setState({
+      columnViewOrientation: imageOrientation,
+      columnViewPosition: imagePosition
+    });
+  }
+
   onClickListenerColumnView(position) {
     this.setState({
       columnViewFlag: true,

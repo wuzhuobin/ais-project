@@ -80,7 +80,7 @@ AisCtaColumnView.propTyps = {
 AisCtaColumnView.defaultProps = {
   imagePrefix: '2D_MIP',
   imageOrientation: AisCtaColumnView.ORIENTATION.AXIAL,
-  imagePosition: AisCtaColumnView.POSITION.MIDDLE,
+  imagePosition: AisCtaColumnView.POSITION.ANTERIOR,
   imageExtensionName: 'png',
 };
 let AisCtaColumnViewT = withTranslation()(AisCtaColumnView);
