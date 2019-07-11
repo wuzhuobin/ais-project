@@ -47,12 +47,22 @@ class AisCtaColumnView extends React.Component {
         <Row className="Row" type="flex" align="middle">
           <Col className="Col" span={11}>
             <img className="BrainImg" src={images[0]} alt={images[0]}></img>
+            <div className="Notation">
+              Right Hemisphere R-L View
+            </div>
           </Col>
           <Col className="Col" span={2}>
-            <img className="ColorBar" src={ColorBars[t('BloodVesselDensity')]} alt="ColorBar"></img>
+            {
+              this.props.imageOrientation !== AisCtaColumnView.ORIENTATION.SAGITTAL ?
+                <img className="ColorBar" src={ColorBars[t('BloodVesselDensity')]} alt="ColorBar"></img> :
+                null
+            }
           </Col>
           <Col className="Col" span={11}>
             <img className="BrainImg" src={images[1]} alt={images[1]}></img>
+            <div className="Notation">
+              Left Hemisphere R-L View
+            </div>
           </Col>
         </Row>
       </div>

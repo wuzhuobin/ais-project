@@ -7,11 +7,18 @@
 {
   height: 100%;
   width: auto;
+  display: block;
+  margin: auto;
 }
 .AisCtaColumnView, .ColorBar
 {
   height: 100%;
   width: 100%;
+}
+.AisCtaColumnView .Notation {
+  position: relative;
+  font-size: 150%;
+  bottom: 50px;
 }
 /* 
 .AisCtaColumnView .BrainImg{
