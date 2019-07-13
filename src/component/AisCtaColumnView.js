@@ -42,13 +42,24 @@ class AisCtaColumnView extends React.Component {
       BloodVesselDensity: ColorBarEn,
       XueMiDu: ColorBarZh
     };
+    const getNotation = (rightFlag) => {
+      switch (this.props.imageOrientation) {
+        case AisCtaColumnView.ORIENTATION.AXIAL:
+          return 'Axial View';
+        case AisCtaColumnView.ORIENTATION.CORONAL:
+          return 'Coronal View';
+        case AisCtaColumnView.ORIENTATION.SAGITTAL:
+          return rightFlag ? 'Right Hemisphere R-L View' : 'Left Hemisphere R-L View';
+      }
+    };
+
     return (
       <div className="AisCtaColumnView">
         <Row className="Row" type="flex" align="middle">
           <Col className="Col" span={11}>
             <img className="BrainImg" src={images[0]} alt={images[0]}></img>
             <div className="Notation">
-              Right Hemisphere R-L View
+              {getNotation(true)}
             </div>
           </Col>
           <Col className="Col" span={2}>
@@ -61,7 +72,7 @@ class AisCtaColumnView extends React.Component {
           <Col className="Col" span={11}>
             <img className="BrainImg" src={images[1]} alt={images[1]}></img>
             <div className="Notation">
-              Left Hemisphere R-L View
+              {getNotation(false)}
             </div>
           </Col>
         </Row>
