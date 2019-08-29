@@ -23,8 +23,8 @@ class App extends Component {
 		console.log(user)
 		console.log(path)
 
-		const currentDir = "http://file.brainnow.net/ais/" + user + "/" + path
-		const jsonPath = "http://file.brainnow.net/ais/" + user + "/" + path + "/info_ais.json"
+		const currentDir = "http://file.accubraintx.com/ais/" + user + "/" + path
+		const jsonPath = "http://file.accubraintx.com/ais/" + user + "/" + path + "/info_ais.json"
 		console.log(jsonPath)
 
 

@@ -56,7 +56,7 @@ class AisCtaPane extends React.Component {
     console.log(user)
     console.log(path)
 
-    const currentDir = 'http://file.brainnow.net/ais/' + user + '/' + path
+    const currentDir = 'http://file.accubraintx.com/ais/' + user + '/' + path
     this.setState({ 
       columnViewPrefix: currentDir + '/2D_MIP',
       _3DViewPrefix: currentDir + '/CTA_Output'
