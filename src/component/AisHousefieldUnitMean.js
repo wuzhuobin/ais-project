@@ -1,7 +1,7 @@
 // node_modules
 import React from 'react';
 import { Layout } from 'antd';
-import { Slider } from 'antd';
+// import { Slider } from 'antd';
 import { Row, Col } from 'antd';
 import { withTranslation } from 'react-i18next';
 // me
@@ -11,6 +11,13 @@ import { ORIENTATION } from './AisColorSelectionCard';
 import AppContext from '../AppContext';
 
 class AisHousefieldUnitMean extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      aspectFinalScore: 10,
+    };
+  }
+
   render() {
     const t = this.props.t;
     return (
@@ -23,6 +30,7 @@ class AisHousefieldUnitMean extends React.Component {
                 <AisColorSelectionCard
                   orientation={ORIENTATION.LEFT}
                   affected={this.context.infoAis.Affected_Side === 'Left' ? true : false}
+                  aspectFinalScoreHandler={this.aspectFinalScoreHandler.bind(this)}
                 >
                 </AisColorSelectionCard>
               </Col>
@@ -30,6 +38,7 @@ class AisHousefieldUnitMean extends React.Component {
                 <AisColorSelectionCard
                   orientation={ORIENTATION.RIGHT}
                   affected={this.context.infoAis.Affected_Side === 'Left' ? false : true}
+                  aspectFinalScoreHandler={this.aspectFinalScoreHandler.bind(this)}
                 >
                 </AisColorSelectionCard>
               </Col>
@@ -40,11 +49,18 @@ class AisHousefieldUnitMean extends React.Component {
          <br/>
          <br/>
          <br/>
-         {/*<h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.context.infoAis.ASPECT_Final_Score}</h2>"*/}
+         {/* <h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.context.infoAis.ASPECT_Final_Score}</h2>" */}
+         <h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.state.aspectFinalScore}</h2>"
          <br/>
         </Layout.Footer>
       </Layout>
     );
+  }
+
+  aspectFinalScoreHandler(minusFlag) {
+    // if(minusFlag) {
+      this.setState({ aspectFinalScore: minusFlag? --this.state.aspectFinalScore: ++this.state.aspectFinalScore });
+    // }
   }
 }
 

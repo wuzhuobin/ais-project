@@ -214,3 +214,7 @@
   background-color: #CE93D8;
   color:gray;
 }
+
+.ant-switch-checked {
+  background-color: red;
+}

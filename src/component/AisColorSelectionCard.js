@@ -1,6 +1,7 @@
 // node_modules
 import React from 'react';
 import { Card } from 'antd';
+import { Switch } from 'antd';
 import { withTranslation } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
 //
@@ -27,6 +28,12 @@ const ColorSelectionItem = function(props) {
           <mark className={props.isAis}>
             {props.huMean}
           </mark>
+          <Switch 
+            className="Switch" 
+            disabled={!props.affected}
+            onChange={props.aspectFinalScoreHandler}
+          >
+          </Switch>
         </td>
       </tr></tbody></table>
     </div>
@@ -50,60 +57,70 @@ class AisColorSelectionCard extends React.Component {
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[0]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[0]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
         <ColorSelectionItem 
           type="IC"
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[1]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[1]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
         <ColorSelectionItem 
           type="L"
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[2]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[2]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
         <ColorSelectionItem 
           type="I"
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[3]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[3]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
         <ColorSelectionItem 
           type="M1"
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[4]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[4]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
         <ColorSelectionItem 
           type="M2"
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[5]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[5]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
         <ColorSelectionItem 
           type="M3"
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[6]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[6]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
         <ColorSelectionItem 
           type="M4"
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[7]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[7]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
         <ColorSelectionItem 
           type="M5"
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[8]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[8]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
         <ColorSelectionItem 
           type="M6"
           affected={this.props.affected}
           isAis={this.context.infoAis.ASPECT_Score[scores[9]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
           huMean={this.context.infoAis.HU_Mean[means[9]]}
+          aspectFinalScoreHandler={this.props.aspectFinalScoreHandler}
         ></ColorSelectionItem>
       </Card>
     );
@@ -114,7 +131,8 @@ AisColorSelectionCard.contextType = AppContext;
 
 AisColorSelectionCard.defaultProps = {
   orientation: ORIENTATION.LEFT,
-  affected: true
+  affected: true,
+  aspectFinalScoreHandler: null,
 };
 
 export default withTranslation()(AisColorSelectionCard);
