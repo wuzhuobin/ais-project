@@ -69,12 +69,7 @@ class CornerstoneLayerViewport extends Component {
         },
         mouseButtonMasks: [1, 2]
       },
-      { name: 'Wwwc', mouseButtonMasks: [1] },
-      { name: 'Bidirectional', mouseButtonMasks: [1] },
-      { name: 'Length', mouseButtonMasks: [1] },
-      { name: 'Angle', mouseButtonMasks: [1] },
-      { name: 'StackScroll', mouseButtonMasks: [1] },
-      { name: 'Brush', mouseButtonMasks: [1] },
+      { name: 'Wwwc', mouseButtonMasks: [1, 2] },
       { name: 'PanMultiTouch' },
       { name: 'ZoomTouchPinch' },
       { name: 'StackScrollMouseWheel' },
@@ -158,7 +153,6 @@ class CornerstoneLayerViewport extends Component {
       });
     }, 300);
 
-    this.thisref = React.createRef();
   }
 
   render() {
@@ -229,7 +223,6 @@ class CornerstoneLayerViewport extends Component {
           ref={input => {
             this.element = input;
           }}
-          onMouseMove={this.onMouseMove.bind(this)}
         >
           {displayLoadingIndicator && (
             <LoadingIndicator error={this.state.error} />
@@ -263,12 +256,6 @@ class CornerstoneLayerViewport extends Component {
       viewport: Object.assign({}, event.detail.viewport)
     });
   };
-
-  onMouseMove = event => {
-    // console.log(event)
-    const pixelCoords = cornerstone.pageToPixel(this.element, event.pageX, event.pageY);
-    console.log([pixelCoords.x, pixelCoords.y]);
-  }
 
   onNewImage = event => {
     this.setState({

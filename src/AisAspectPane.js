@@ -9,6 +9,9 @@ import AisHousefieldUnitMean from './component/AisHousefieldUnitMean';
 import CornerstoneLayerViewport from './component/ais-cornerstone/CornerstoneLayerViewport';
 import stackLayerIndexSynchronizer from './component/ais-cornerstone/stackLayerIndexSynchronizer';
 import AppContext from './AppContext';
+import PickAisTool from './component/ais-cornerstone/PickAisTool';
+import './component/ais-cornerstone/initCornerstone';
+// import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader';
 
 export default class AisAspectPane extends React.Component {
   constructor(props) {
@@ -91,35 +94,7 @@ export default class AisAspectPane extends React.Component {
           }
         }
       }
-/*    },
-    {
-      imageId: 'nifti://' + "file.brainnow.net/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz',
-      // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image-ais.nii.gz',
-      options: {
-        name: 'Label2',
-        opacity: 0.4,
-        viewport: {
-          colormap: 'myCustomColorMap2',
-          voi: {
-            windowWidth: 255,
-            windowCenter: 127.5
-          }
-        }
-      }*/
     }];
-
-    // const layer1 = [{
-    //   imageId: 'nifti://' + window.location.hostname + ':' + window.location.port +
-    //     this.context.workingDir + '/image.nii.gz',
-    //   options: {
-    //     name: 'CT',
-    //     opacity: 1,
-    //     viewport: { voi: { windowWidth: 80, windowCenter: 40 } }
-    //   }
-    // }];
-
-    console.log("ertyuifghjkfghjk")
-    console.log(this.context)
 
     return (
       <div className="AisAspectPane">
@@ -138,6 +113,7 @@ export default class AisAspectPane extends React.Component {
               <CornerstoneLayerViewport 
                 viewportData={layer}
                 ref={this.viewerRef2 }
+                activeTool='PickAis'
               ></CornerstoneLayerViewport>
             </div>
           </Col>
@@ -164,6 +140,23 @@ export default class AisAspectPane extends React.Component {
     synchronizer.add(this.viewerRef1.current.element);
     synchronizer.add(this.viewerRef2.current.element);
     synchronizer.enabled = true;
+
+    cornerstoneTools.addToolForElement(this.viewerRef2.current.element, PickAisTool);
+    // this.viewerRef2.current.setActiveTool('PickAis');
+    this.loadAisImage();
+  }
+
+  loadAisImage() {
+    const url = 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz';
+    // const imageIdObject = cornerstoneNIFTIImageLoader.nifti.ImageId.fromURL(url);
+    // console.log(imageIdObject)
+
+    cornerstone.loadImage(url).then(image => {
+      console.log(image);
+      cornerstoneTools.addToolState(this.viewerRef2.current.element, 'PickAisData', image);
+      console.log(cornerstoneTools.getToolState(this.viewerRef2.current.element, 'PickAisData'));
+      // console.log(image.getPixelData());
+    });
   }
 }
 
