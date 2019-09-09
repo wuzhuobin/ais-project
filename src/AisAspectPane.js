@@ -7,9 +7,9 @@ import cornerstoneTools from 'cornerstone-tools';
 import './AisAspectPane.css';
 import AisHousefieldUnitMean from './component/AisHousefieldUnitMean';
 import CornerstoneLayerViewport from './component/ais-cornerstone/CornerstoneLayerViewport';
+import AisCornerstoneLayerViewport from './component/ais-cornerstone/AisCornerstoneLayerViewport';
 import stackLayerIndexSynchronizer from './component/ais-cornerstone/stackLayerIndexSynchronizer';
 import AppContext from './AppContext';
-import PickAisTool from './component/ais-cornerstone/PickAisTool';
 import './component/ais-cornerstone/initCornerstone';
 // import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader';
 
@@ -95,6 +95,7 @@ export default class AisAspectPane extends React.Component {
         }
       }
     }];
+    const aisUrl = 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz';
 
     return (
       <div className="AisAspectPane">
@@ -110,11 +111,11 @@ export default class AisAspectPane extends React.Component {
           </Col>
           <Col span={8}>
             <div className="CornerstoneLayerViewport">
-              <CornerstoneLayerViewport 
+              <AisCornerstoneLayerViewport 
                 viewportData={layer}
-                ref={this.viewerRef2 }
-                activeTool='PickAis'
-              ></CornerstoneLayerViewport>
+                ref={this.viewerRef2}
+                aisUrl={aisUrl}
+              ></AisCornerstoneLayerViewport>
             </div>
           </Col>
           <Col span={8}>
@@ -141,23 +142,31 @@ export default class AisAspectPane extends React.Component {
     synchronizer.add(this.viewerRef2.current.element);
     synchronizer.enabled = true;
 
-    cornerstoneTools.addToolForElement(this.viewerRef2.current.element, PickAisTool);
+    // cornerstoneTools.addToolForElement(this.viewerRef2.current.element, PickAisTool);
     // this.viewerRef2.current.setActiveTool('PickAis');
-    this.loadAisImage();
   }
 
-  loadAisImage() {
-    const url = 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz';
-    // const imageIdObject = cornerstoneNIFTIImageLoader.nifti.ImageId.fromURL(url);
-    // console.log(imageIdObject)
+  // componentDidUpdate() {
+  //   this.loadAisImage();
+  // }
 
-    cornerstone.loadImage(url).then(image => {
-      console.log(image);
-      cornerstoneTools.addToolState(this.viewerRef2.current.element, 'PickAisData', image);
-      console.log(cornerstoneTools.getToolState(this.viewerRef2.current.element, 'PickAisData'));
-      // console.log(image.getPixelData());
-    });
-  }
+  // loadAisImage() {
+  //   const url = 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz';
+  //   // const imageIdObject = cornerstoneNIFTIImageLoader.nifti.ImageId.fromURL(url);
+  //   // console.log(imageIdObject)
+
+  //   cornerstone.loadAndCacheImage(url).then(image => {
+  //     console.log(image);
+  //     cornerstoneTools.addToolState(this.viewerRef2.current.element, 'PickAisData', image);
+  //     const stateManager = cornerstoneTools.getElementToolStateManager(this.viewerRef2.current.element);
+  //     stateManager.add(this.viewerRef2.current.element, 'PickAisData', image);
+  //     console.log(stateManager.get(this.viewerRef2.current.element, 'PickAisData'))
+  //     console.log(cornerstoneTools.getElementToolStateManager(this.viewerRef2.current.element));
+  //     console.log(cornerstoneTools.getToolState(this.viewerRef2.current.element, 'PickAisData'));
+  //     console.log(image.getPixelData());
+
+  //   });
+  // }
 }
 
 

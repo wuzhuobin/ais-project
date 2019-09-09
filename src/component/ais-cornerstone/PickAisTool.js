@@ -104,8 +104,6 @@ const defaultStrategy = (evt, config) => {
     return;
   }
 
-  console.log(cornerstoneTools.getToolState(element, 'PickAisData'))
-
   draw(context, context => {
     setShadow(context, config);
 
