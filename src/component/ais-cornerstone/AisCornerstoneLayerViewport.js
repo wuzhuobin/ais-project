@@ -46,9 +46,20 @@ class AisCornerstoneLayerViewport extends CornerstoneLayerViewport {
   static propTypes = {
     aisUrl: PropTypes.string.isRequired,
   };
+
   constructor(props) {
     super(props);
+    console.log(this.props.aisUrl);
   }
+
+  onImageLoaded = () => {
+
+    cornerstoneTools.clearToolState(this.element, 'AisData');
+    cornerstoneTools.addToolState(this.element, 'AisData', this.props.aisUrl);
+    console.log(cornerstoneTools.getElementToolStateManager(this.element))
+    console.log(cornerstoneTools.getToolState(this.element, 'AisData'));
+  }
+
 };
 
 export default AisCornerstoneLayerViewport;

@@ -84,7 +84,7 @@ class CornerstoneLayerViewport extends Component {
         },
         mouseButtonMasks: [1, 2]
       },
-      { name: 'Wwwc', mouseButtonMasks: [1, 2] },
+      { name: 'Wwwc', mouseButtonMasks: [1] },
       { name: 'PanMultiTouch' },
       { name: 'ZoomTouchPinch' },
       { name: 'StackScrollMouseWheel' },
