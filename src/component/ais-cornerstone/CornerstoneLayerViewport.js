@@ -13,11 +13,12 @@ import 'react-cornerstone-viewport'
 
 import './CornerstoneLayerViewport.css';
 import './initCornerstone';
-import { prototype } from 'events';
+// import { prototype } from 'events';
 
 const EVENT_RESIZE = 'resize';
 
 const scrollToIndex = cornerstoneTools.import('util/scrollToIndex');
+const { loadHandlerManager } = cornerstoneTools;
 
 function setToolsPassive(cornerstoneTools, tools) {
   tools.forEach(tool => {
@@ -45,6 +46,20 @@ function initializeTools(cornerstoneTools, tools, element) {
       );
     }
   });
+}
+
+function layoutsEqual(a, b) {
+  if (a.viewports.length !== b.viewports.length) {
+    return false;
+  }
+
+  return a.viewports.every((aViewport, index) => {
+    return viewportsEqual(aViewport, b.viewports[index]);
+  });
+}
+
+function viewportsEqual(a, b) {
+  return a.height === b.height && a.width === b.width;
 }
 
 class CornerstoneLayerViewport extends Component {
@@ -134,9 +149,7 @@ class CornerstoneLayerViewport extends Component {
       viewport: cornerstone.getDefaultViewport(null, undefined)
     };
 
-    const { loadHandlerManager } = cornerstoneTools;
-    loadHandlerManager.setStartLoadHandler(this.startLoadingHandler);
-    loadHandlerManager.setEndLoadHandler(this.doneLoadingHandler);
+    // const { loadHandlerManager } = cornerstoneTools;
 
     this.debouncedResize = debounce(() => {
       try {
@@ -155,6 +168,22 @@ class CornerstoneLayerViewport extends Component {
 
   }
 
+  getOverlay() {
+    const { overlayFlag, viewportOverlayComponent: Component} = this.props;
+    const { stack, viewport, imageId} = this.state;
+    if(overlayFlag === false || stack === null) {
+      return null
+    }
+
+    return (
+      <Component
+        stack={stack}
+        viewport={viewport}
+        imageId={imageId}
+      />
+    );
+  }
+
   render() {
     const isLoading = this.state.isLoading;
     // TODO: Check this later
@@ -165,21 +194,6 @@ class CornerstoneLayerViewport extends Component {
     if (this.props.isActive) {
       className += ' active';
     }
-
-    const getOverlay = () => {
-      if (this.props.overlayFlag === false || this.state.stack === null) {
-        return null;
-      }
-      const Component = this.props.viewportOverlayComponent;
-
-      return (
-        <Component
-          stack={this.state.stack}
-          viewport={this.state.viewport}
-          imageId={this.state.imageId}
-        />
-      );
-    };
 
     const getScrollbar = () => {
       if (this.props.scrollbarFlag === false || this.state.stack === null) {
@@ -228,7 +242,7 @@ class CornerstoneLayerViewport extends Component {
             <LoadingIndicator error={this.state.error} />
           )}
           <canvas className="cornerstone-canvas" />
-          {getOverlay()}
+          {this.getOverlay()}
           {getOrientationMarkers()}
         </div>
         {getScrollbar()}
@@ -372,6 +386,11 @@ class CornerstoneLayerViewport extends Component {
       onElementEnabledFn
     );
     cornerstone.enable(element, this.props.cornerstoneOptions);
+    loadHandlerManager.setStartLoadHandler(
+      this.startLoadingHandler,
+      this.element
+    );
+    loadHandlerManager.setEndLoadHandler(this.doneLoadingHandler, this.element);
 
     // Handle the case where the imageId isn't loaded correctly and the
     // imagePromise returns undefined
@@ -692,7 +711,7 @@ class CornerstoneLayerViewport extends Component {
   //     });
   //   }
 
-    if (this.props.layout !== prevProps.layout) {
+    if (!layoutsEqual(this.props.layout, prevProps.layout)) {
       this.debouncedResize();
     }
 
