@@ -71,31 +71,48 @@ export default class AisAspectPane extends React.Component {
 
 
   render() {
-    const layer = [{
-      imageId: 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image.nii.gz',
-      // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image.nii.gz',
-      options: {
-        name: 'CT',
-        opacity: 1,
-        viewport: { voi: { windowWidth: 80, windowCenter: 40 } }
-      }
-    },
-    {
-      imageId: 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-atlas-contour.nii.gz',
-      // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image-atlas-contour.nii.gz',
-      options: {
-        name: 'Label',
-        opacity: 1,
-        viewport: {
-          colormap: 'myCustomColorMap1',
-          voi: {
-            windowWidth: 255,
-            windowCenter: 127.5
+    const layer = [
+      {
+        imageId: 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image.nii.gz',
+        // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image.nii.gz',
+        options: {
+          name: 'CT',
+          opacity: 1,
+          viewport: { voi: { windowWidth: 80, windowCenter: 40 } }
+        }
+      },
+      {
+        imageId: 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-atlas-contour.nii.gz',
+        // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image-atlas-contour.nii.gz',
+        options: {
+          name: 'Label',
+          opacity: 1,
+          viewport: {
+            colormap: 'myCustomColorMap1',
+            voi: {
+              windowWidth: 255,
+              windowCenter: 127.5
+            }
+          }
+        },
+      },
+      {
+        imageId: 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz',
+        // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image.nii.gz',
+        options: {
+          name: 'PickAisData',
+          opacity: 1,
+          viewport: {
+            colormap: 'myCustomColorMap1',
+            voi: {
+              windowWidth: 255,
+              windowCenter: 127.5
+            }
           }
         }
-      }
-    }];
-    const aisUrl = 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz';
+      },
+    ];
+    // const aisUrl = 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz';
 
     return (
       <div className="AisAspectPane">
@@ -114,7 +131,6 @@ export default class AisAspectPane extends React.Component {
               <AisCornerstoneLayerViewport 
                 viewportData={layer}
                 ref={this.viewerRef2}
-                aisUrl={aisUrl}
               ></AisCornerstoneLayerViewport>
             </div>
           </Col>
