@@ -4,6 +4,7 @@ import { Card } from 'antd';
 import { Switch } from 'antd';
 import { withTranslation } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
+import { Row, Col } from 'antd';
 //
 import './AisColorSelectionCard.css';
 import AisAspectScoreContext from '../AisAspectScoreContext';
@@ -16,28 +17,28 @@ const ORIENTATION = {
 
 export { ORIENTATION };
 const ColorSelectionItem = function(props) {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className={[
       'ColorSelectionItem',
       props.type + (props.affected ? 'Affected' : 'UnAffected')].join(' ')}>
-      <table><tbody><tr>
-        <td>
-          {t(props.type)}
-        </td>
-        <td>
+      <Row type="flex" justify="space-around">
+        <Col span={3}>{t(props.type)}</Col>
+        <Col span={3}>
           <mark className={props.isAis}>
             {props.huMean}
           </mark>
-          <Switch 
+        </Col>
+        <Col span={6}>
+          <Switch
             checked={props.checked}
-            className="Switch" 
+            className="Switch"
             disabled={!props.affected}
             onChange={props.onChange}
           >
           </Switch>
-        </td>
-      </tr></tbody></table>
+        </Col>
+      </Row>
     </div>
   );
 };

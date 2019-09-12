@@ -39,12 +39,12 @@
   font-weight: bold;
 }
 
-.ColorSelectionItem table, .ColorSelectionItem table, .ColorSelectionItem td{
+/* .ColorSelectionItem table, .ColorSelectionItem table, .ColorSelectionItem td{
   width: 100%;
   text-align: left;
   padding-left:30px;
   padding-right:40px;
-}
+} */
 
 .CLabel {
   background-color: rgb(255, 255, 0);
