@@ -46,6 +46,12 @@ export default class PickAisTool extends BaseTool {
       const pixelData = image.getPixelData()[index];
 
       console.log(pixelData);
+      const toggleScore = cornerstoneTools.getToolState(element, 'toggleScore').data[0];
+      // console.log(toggleScore)
+      if (pixelData === 0) {
+        return;
+      }
+      toggleScore(pixelData - 1)
     });
   }
 }

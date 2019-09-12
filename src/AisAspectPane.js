@@ -11,6 +11,7 @@ import AisCornerstoneLayerViewport from './component/ais-cornerstone/AisCornerst
 import stackLayerIndexSynchronizer from './component/ais-cornerstone/stackLayerIndexSynchronizer';
 import AppContext from './AppContext';
 import './component/ais-cornerstone/initCornerstone';
+import AisAspectScoreContext from './AisAspectScoreContext';
 // import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader';
 
 export default class AisAspectPane extends React.Component {
@@ -18,6 +19,26 @@ export default class AisAspectPane extends React.Component {
     super(props);
     this.viewerRef1 = React.createRef();
     this.viewerRef2 = React.createRef();
+
+    this.state = {};
+    this.state.score = new Array(20);
+    this.state.score.fill(false);
+    this.state.toggleScore = (index) => {
+      this.setState((state) => {
+        const newScore = state.score.slice();
+        newScore[index] = !newScore[index];
+        return {score: newScore};
+      }, () => {
+        let newScore =  10;
+          for (let i = 0; i < 10; ++i) {
+            if (this.state.score[(this.context.infoAis.Affected_Side === 'Left') ? i : 10 + i]) {
+              --newScore;
+            }
+          }
+          this.context.updateInfoAis({ASPECT_Final_Score: newScore});
+       });
+    };
+
     let colormap = cornerstone.colors.getColormap('myCustomColorMap1');
     colormap.setNumberOfColors(256);
     colormap.insertColor(0, [0, 0, 0, 0]);
@@ -31,6 +52,7 @@ export default class AisAspectPane extends React.Component {
     colormap.insertColor(8, [102, 187, 106, 255]);
     colormap.insertColor(9, [141, 110, 99, 255]);
     colormap.insertColor(10, [171, 71, 188, 255]);
+    
     colormap.insertColor(11, [255, 238, 88, 255]);
     colormap.insertColor(12, [156, 204, 101, 255]);
     colormap.insertColor(13, [41, 182, 246, 255]);
@@ -42,10 +64,10 @@ export default class AisAspectPane extends React.Component {
     colormap.insertColor(19, [141, 110, 99, 255]);
     colormap.insertColor(20, [171, 71, 188, 255]);
 
-    colormap = cornerstone.colors.getColormap('myCustomColorMap2');
-    colormap.setNumberOfColors(256);
-    colormap.insertColor(0, [0, 0, 0, 0]);
-    colormap.insertColor(1, [255, 0, 0, 256]);
+    // colormap = cornerstone.colors.getColormap('myCustomColorMap2');
+    // colormap.setNumberOfColors(256);
+    // colormap.insertColor(0, [0, 0, 0, 0]);
+    // colormap.insertColor(1, [255, 0, 0, 256]);
   }
   GetUrlParam(paraName) {
     var url = document.location.toString();
@@ -101,7 +123,7 @@ export default class AisAspectPane extends React.Component {
         // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image.nii.gz',
         options: {
           name: 'PickAisData',
-          opacity: 1,
+          opacity: 0,
           viewport: {
             colormap: 'myCustomColorMap1',
             voi: {
@@ -113,42 +135,44 @@ export default class AisAspectPane extends React.Component {
       },
     ];
     // const aisUrl = 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz';
-
     return (
-      <div className="AisAspectPane">
-        <Row>
-          <Col span={8}>
-            <div className="CornerstoneLayerViewport">
-              <CornerstoneLayerViewport 
-                viewportData={[layer[0]]}
-                scrollbarFlag={false}
-                ref={this.viewerRef1}
-              ></CornerstoneLayerViewport>
-            </div>
-          </Col>
-          <Col span={8}>
-            <div className="CornerstoneLayerViewport">
-              <AisCornerstoneLayerViewport 
-                viewportData={layer}
-                ref={this.viewerRef2}
-              ></AisCornerstoneLayerViewport>
-            </div>
-          </Col>
-          <Col span={8}>
-            <AisHousefieldUnitMean></AisHousefieldUnitMean>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={4}></Col>
-          <Col span={4}></Col>
-          <Col span={4}>
-            {/* <Button>WindowLevel</Button> */}
-          </Col>
-          <Col span={4}></Col>
-          <Col span={4}></Col>
-          <Col span={4}></Col>
-        </Row>
-      </div>
+      <AisAspectScoreContext.Provider value={this.state}>
+        <div className="AisAspectPane">
+          <Row>
+            <Col span={8}>
+              <div className="CornerstoneLayerViewport">
+                <CornerstoneLayerViewport
+                  viewportData={[layer[0]]}
+                  scrollbarFlag={false}
+                  ref={this.viewerRef1}
+                ></CornerstoneLayerViewport>
+              </div>
+            </Col>
+            <Col span={8}>
+              <div className="CornerstoneLayerViewport">
+                <AisCornerstoneLayerViewport
+                  viewportData={layer}
+                  ref={this.viewerRef2}
+                  toggleScore={this.state.toggleScore}
+                ></AisCornerstoneLayerViewport>
+              </div>
+            </Col>
+            <Col span={8}>
+              <AisHousefieldUnitMean></AisHousefieldUnitMean>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={4}></Col>
+            <Col span={4}></Col>
+            <Col span={4}>
+              {/* <Button>WindowLevel</Button> */}
+            </Col>
+            <Col span={4}></Col>
+            <Col span={4}></Col>
+            <Col span={4}></Col>
+          </Row>
+        </div>
+      </AisAspectScoreContext.Provider>
     );
   }
   
@@ -157,9 +181,6 @@ export default class AisAspectPane extends React.Component {
     synchronizer.add(this.viewerRef1.current.element);
     synchronizer.add(this.viewerRef2.current.element);
     synchronizer.enabled = true;
-
-    // cornerstoneTools.addToolForElement(this.viewerRef2.current.element, PickAisTool);
-    // this.viewerRef2.current.setActiveTool('PickAis');
   }
 
   // componentDidUpdate() {

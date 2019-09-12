@@ -30,7 +30,7 @@ class AisHousefieldUnitMean extends React.Component {
                 <AisColorSelectionCard
                   orientation={ORIENTATION.LEFT}
                   affected={this.context.infoAis.Affected_Side === 'Left' ? true : false}
-                  aspectFinalScoreHandler={this.aspectFinalScoreHandler.bind(this)}
+                  toggleScore={this.props.toggleScore}
                 >
                 </AisColorSelectionCard>
               </Col>
@@ -38,7 +38,7 @@ class AisHousefieldUnitMean extends React.Component {
                 <AisColorSelectionCard
                   orientation={ORIENTATION.RIGHT}
                   affected={this.context.infoAis.Affected_Side === 'Left' ? false : true}
-                  aspectFinalScoreHandler={this.aspectFinalScoreHandler.bind(this)}
+                  toggleScore={index => this.props.toggleScore(index + 10)}
                 >
                 </AisColorSelectionCard>
               </Col>
@@ -49,19 +49,18 @@ class AisHousefieldUnitMean extends React.Component {
          <br/>
          <br/>
          <br/>
-         {/* <h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.context.infoAis.ASPECT_Final_Score}</h2>" */}
-         <h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.state.aspectFinalScore}</h2>"
+         <h2 className="ScoreLabel">{t('ASPECT Score')}<br />{this.context.infoAis.ASPECT_Final_Score}</h2>"
          <br/>
         </Layout.Footer>
       </Layout>
     );
   }
 
-  aspectFinalScoreHandler(minusFlag) {
-    // if(minusFlag) {
-      this.setState({ aspectFinalScore: minusFlag? --this.state.aspectFinalScore: ++this.state.aspectFinalScore });
-    // }
-  }
+  // aspectFinalScoreHandler(minusFlag) {
+  //   // if(minusFlag) {
+  //     this.setState({ aspectFinalScore: minusFlag? --this.state.aspectFinalScore: ++this.state.aspectFinalScore });
+  //   // }
+  // }
 }
 
 AisHousefieldUnitMean.contextType = AppContext;

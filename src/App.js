@@ -13,8 +13,19 @@ import AppContext from './AppContext';
 class App extends Component {
 	constructor() {
 		super();
-		this.state = { testContext: { infoAis: InfoAisSample, workingDir: "" } };
-	}
+		// this.state = { testContext: { infoAis: InfoAisSample, workingDir: "" } };
+    this.state = {
+      infoAis: InfoAisSample,
+      workingDir: "",
+      updateInfoAis: (newInfoAis) => {
+        this.setState(function (state) {
+          return {
+            infoAis: Object.assign(state.infoAis, newInfoAis),
+          };
+        });
+      },
+    };
+  }
 
 	async componentWillMount() {
 		var user = this.GetUrlParam("user");
@@ -31,7 +42,10 @@ class App extends Component {
 		const json = await fetch(jsonPath)
 			.then(response => response.json());
 
-		this.setState({ testContext: { infoAis: json, workingDir: currentDir } });
+    this.setState({ infoAis: json, workingDir: currentDir });
+    // ignore the value in json.
+    // TODO: why not just update it in server.
+    this.state.updateInfoAis({ASPECT_Final_Score: 10});
 		console.log(json)
 	}
 
@@ -60,7 +74,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App"><AppContext.Provider value={this.state.testContext}>
+			<div className="App"><AppContext.Provider value={this.state}>
 				<AisPageHeader></AisPageHeader>
 				<AisPatientInfo></AisPatientInfo>
 				<AisOnlineViewer></AisOnlineViewer>
