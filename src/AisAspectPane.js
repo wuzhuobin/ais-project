@@ -119,7 +119,7 @@ export default class AisAspectPane extends React.Component {
         },
       },
       {
-        imageId: 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz',
+        imageId: 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-atlas.nii.gz',
         // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image.nii.gz',
         options: {
           name: 'PickAisData',
