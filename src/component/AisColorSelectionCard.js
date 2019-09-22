@@ -21,7 +21,7 @@ const ColorSelectionItem = function(props) {
   return (
     <div className={[
       'ColorSelectionItem',
-      props.type + (props.affected ? 'Affected' : 'UnAffected')].join(' ')}>
+      props.type + 'Affected'].join(' ')}>
       <Row type="flex" justify="space-around">
         <Col span={3}>{t(props.type)}</Col>
         <Col span={3}>
@@ -33,7 +33,6 @@ const ColorSelectionItem = function(props) {
           <Switch
             checked={props.checked}
             className="Switch"
-            disabled={!props.affected}
             onChange={props.onChange}
           >
           </Switch>
