@@ -23,13 +23,13 @@ const ColorSelectionItem = function(props) {
       'ColorSelectionItem',
       props.type + 'Affected'].join(' ')}>
       <Row type="flex" justify="space-around">
-        <Col span={3}>{t(props.type)}</Col>
+        <Col span={12}>{t(props.type)}</Col>
         <Col span={3}>
           <mark className={props.isAis}>
             {props.huMean}
           </mark>
         </Col>
-        <Col span={6}>
+        <Col span={4}>
           <Switch
             checked={props.checked}
             className="Switch"

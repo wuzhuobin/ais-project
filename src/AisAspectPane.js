@@ -29,14 +29,13 @@ export default class AisAspectPane extends React.Component {
         newScore[index] = !newScore[index];
         return {score: newScore};
       }, () => {
-        let leftScore =  10;
-        let rightScore = 10;
-          for (let i = 0; i < 20; ++i) {
-            if(this.state.score[i]) {
-              i < 10 ? leftScore-- : rightScore--;
+          let score = 10;
+          for (let i = 0; i < 10; ++i) {
+            if (this.state.score[i] || this.state.score[i + 10]) {
+              score--;
             }
           }
-          this.context.updateInfoAis({ASPECT_Final_Score: Math.min(leftScore, rightScore)});
+          this.context.updateInfoAis({ASPECT_Final_Score: score});
        });
     };
 
