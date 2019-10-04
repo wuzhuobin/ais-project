@@ -75,25 +75,13 @@ class AisCtaPane extends React.Component {
             onClick={this.onClickListenerMenu.bind(this)}
           >
             <Menu.SubMenu title={t('Axial')} key={AisCtaColumnViewer.ORIENTATION.AXIAL}>
-              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.AXIAL, AisCtaColumnViewer.POSITION.ANTERIOR].join(' ')}>
-                {t('ACA')}
-              </Menu.Item>
               <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.AXIAL, AisCtaColumnViewer.POSITION.MIDDLE].join(' ')}>
                 {t('MCA')}
               </Menu.Item>
-              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.AXIAL, AisCtaColumnViewer.POSITION.POSTERIOR].join(' ')}>
-                {t('PCA')}
-              </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu title={t('Coronal')} key={AisCtaColumnViewer.ORIENTATION.CORONAL}>
-              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.CORONAL, AisCtaColumnViewer.POSITION.ANTERIOR].join(' ')}>
-                {t('ACA')}
-              </Menu.Item>
               <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.CORONAL, AisCtaColumnViewer.POSITION.MIDDLE].join(' ')}>
                 {t('MCA')}
-              </Menu.Item>
-              <Menu.Item key={[AisCtaColumnViewer.ORIENTATION.CORONAL, AisCtaColumnViewer.POSITION.POSTERIOR].join(' ')}>
-                {t('PCA')}
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.Item key={AisCtaColumnViewer.ORIENTATION.SAGITTAL}>
