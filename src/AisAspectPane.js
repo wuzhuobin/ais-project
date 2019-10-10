@@ -139,7 +139,7 @@ export default class AisAspectPane extends React.Component {
         // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image.nii.gz',
         options: {
           name: 'ImageAtlasLabel' + i,
-          opacity: 1,
+          opacity: 0,
           viewport: {
             colormap: 'imageAtlasLabel',
             voi: {

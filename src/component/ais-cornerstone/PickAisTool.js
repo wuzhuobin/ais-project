@@ -44,13 +44,14 @@ export default class PickAisTool extends BaseTool {
 
       const index = y * width + x;
       const pixelData = image.getPixelData()[index];
-
-      console.log(pixelData);
       const toggleScore = cornerstoneTools.getToolState(element, 'toggleScore').data[0];
-      // console.log(toggleScore)
       if (pixelData === 0) {
         return;
       }
+      // hard code style change opacity.
+      cornerstone.getLayers(element)[2 + pixelData].options.opacity = 
+        0 === cornerstone.getLayers(element)[2 + pixelData].options.opacity ? 1: 0;
+      cornerstone.updateImage(element);
       toggleScore(pixelData - 1)
     });
   }
