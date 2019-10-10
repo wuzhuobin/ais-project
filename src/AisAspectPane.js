@@ -64,6 +64,12 @@ export default class AisAspectPane extends React.Component {
     colormap.insertColor(19, [141, 110, 99, 255]);
     colormap.insertColor(20, [171, 71, 188, 255]);
 
+    colormap = cornerstone.colors.getColormap('imageAtlasLabel');
+    colormap.setNumberOfColors(256);
+    // colormap.insertColor(0, [0, 0, 0, 0]);
+    colormap.insertColor(1, [255, 0, 0, 255]);
+
+
     // colormap = cornerstone.colors.getColormap('myCustomColorMap2');
     // colormap.setNumberOfColors(256);
     // colormap.insertColor(0, [0, 0, 0, 0]);
@@ -124,16 +130,26 @@ export default class AisAspectPane extends React.Component {
         options: {
           name: 'PickAisData',
           opacity: 0,
+        }
+      },
+    ];
+    for (let i = 1; i <= 20; ++i) {
+      layer.push({
+        imageId: 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-atlas-label-' + i + '.nii.gz',
+        // imageId: 'nifti://file.brainnow.net/ais/brainnow1/BN-DG-S100053-037f32e9-acf7-4898-a295-04de06264299/image.nii.gz',
+        options: {
+          name: 'ImageAtlasLabel' + i,
+          opacity: 1,
           viewport: {
-            colormap: 'myCustomColorMap1',
+            colormap: 'imageAtlasLabel',
             voi: {
               windowWidth: 255,
               windowCenter: 127.5
             }
           }
         }
-      },
-    ];
+      });
+    }
     // const aisUrl = 'nifti://' + "file.accubraintx.com/ais/" + this.GetUrlParam("user") + "/" + this.GetUrlParam("path") + '/image-ais.nii.gz';
     return (
       <AisAspectScoreContext.Provider value={this.state}>

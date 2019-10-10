@@ -61,7 +61,7 @@ class AisColorSelectionCard extends React.Component {
               checked={this.props.orientation === ORIENTATION.LEFT ? score[0]: score[10]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(0) : () => toggleScore(10)}
               affected={this.props.affected}
-              isAis={this.context.infoAis.ASPECT_Score[scores[0]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[0]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[0]]}
             ></ColorSelectionItem>
             <ColorSelectionItem
@@ -69,7 +69,7 @@ class AisColorSelectionCard extends React.Component {
               checked={this.props.orientation === ORIENTATION.LEFT ? score[1]: score[11]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(1) : () => toggleScore(11)}
               affected={this.props.affected}
-              isAis={this.context.infoAis.ASPECT_Score[scores[1]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[1]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[1]]}
             ></ColorSelectionItem>
             <ColorSelectionItem
@@ -77,7 +77,7 @@ class AisColorSelectionCard extends React.Component {
               affected={this.props.affected}
               checked={this.props.orientation === ORIENTATION.LEFT ? score[2]: score[12]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(2) : () => toggleScore(12)}
-              isAis={this.context.infoAis.ASPECT_Score[scores[2]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[2]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[2]]}
             ></ColorSelectionItem>
             <ColorSelectionItem
@@ -85,7 +85,7 @@ class AisColorSelectionCard extends React.Component {
               affected={this.props.affected}
               checked={this.props.orientation === ORIENTATION.LEFT ? score[3]: score[13]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(3) : () => toggleScore(13)}
-              isAis={this.context.infoAis.ASPECT_Score[scores[3]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[3]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[3]]}
             ></ColorSelectionItem>
             <ColorSelectionItem
@@ -93,7 +93,7 @@ class AisColorSelectionCard extends React.Component {
               checked={this.props.orientation === ORIENTATION.LEFT ? score[4]: score[14]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(4) : () => toggleScore(14)}
               affected={this.props.affected}
-              isAis={this.context.infoAis.ASPECT_Score[scores[4]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[4]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[4]]}
             ></ColorSelectionItem>
             <ColorSelectionItem
@@ -101,7 +101,7 @@ class AisColorSelectionCard extends React.Component {
               affected={this.props.affected}
               checked={this.props.orientation === ORIENTATION.LEFT ? score[5]: score[15]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(5) : () => toggleScore(15)}
-              isAis={this.context.infoAis.ASPECT_Score[scores[5]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[5]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[5]]}
             ></ColorSelectionItem>
             <ColorSelectionItem
@@ -109,7 +109,7 @@ class AisColorSelectionCard extends React.Component {
               affected={this.props.affected}
               checked={this.props.orientation === ORIENTATION.LEFT ? score[6]: score[16]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(6) : () => toggleScore(16)}
-              isAis={this.context.infoAis.ASPECT_Score[scores[6]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[6]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[6]]}
             ></ColorSelectionItem>
             <ColorSelectionItem
@@ -117,7 +117,7 @@ class AisColorSelectionCard extends React.Component {
               affected={this.props.affected}
               checked={this.props.orientation === ORIENTATION.LEFT ? score[7]: score[17]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(7) : () => toggleScore(17)}
-              isAis={this.context.infoAis.ASPECT_Score[scores[7]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[7]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[7]]}
             ></ColorSelectionItem>
             <ColorSelectionItem
@@ -125,7 +125,7 @@ class AisColorSelectionCard extends React.Component {
               affected={this.props.affected}
               checked={this.props.orientation === ORIENTATION.LEFT ? score[8]: score[18]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(8) : () => toggleScore(18)}
-              isAis={this.context.infoAis.ASPECT_Score[scores[8]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[8]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[8]]}
             ></ColorSelectionItem>
             <ColorSelectionItem
@@ -133,7 +133,7 @@ class AisColorSelectionCard extends React.Component {
               affected={this.props.affected}
               checked={this.props.orientation === ORIENTATION.LEFT ? score[9]: score[19]}
               onChange={this.props.orientation === ORIENTATION.LEFT ? () => toggleScore(9) : () => toggleScore(19)}
-              isAis={this.context.infoAis.ASPECT_Score[scores[9]] == 1 ? 'markIsAIS' : 'markIsNotAIS'}
+              isAis={this.context.infoAis.ASPECT_Score[scores[9]] === 1 ? 'markIsAIS' : 'markIsNotAIS'}
               huMean={this.context.infoAis.HU_Mean[means[9]]}
             ></ColorSelectionItem>
           </Card>
