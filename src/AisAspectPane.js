@@ -174,7 +174,9 @@ export default class AisAspectPane extends React.Component {
               </div>
             </Col>
             <Col span={8}>
-              <AisHousefieldUnitMean></AisHousefieldUnitMean>
+              <div className="AisHousefieldUnitMean">
+                <AisHousefieldUnitMean></AisHousefieldUnitMean>
+              </div>
             </Col>
           </Row>
           <Row>
