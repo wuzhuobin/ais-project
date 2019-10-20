@@ -173,7 +173,13 @@ export default class AisAspectPane extends React.Component {
                 ></AisCornerstoneLayerViewport>
               </div>
             </Col>
-            <Col span={8}>
+            {/* 
+              TODO
+              Try to find a way to fix the cornerstone view fills up the whole region in mac.
+              Seting the span to 7 is a tempory solution which force it to leave some empty 
+              area, which avoids the problem.
+            */}
+            <Col span={7}>
               <div className="AisHousefieldUnitMean">
                 <AisHousefieldUnitMean></AisHousefieldUnitMean>
               </div>
