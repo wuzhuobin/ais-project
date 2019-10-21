@@ -23,10 +23,17 @@ export default class AisAspectPane extends React.Component {
     this.state = {};
     this.state.score = new Array(20);
     this.state.score.fill(false);
-    this.state.toggleScore = (index) => {
+    this.state.toggleScore = (pixelData) => {
       this.setState((state) => {
+        // hard code style change opacity.
+        // the pxiel label starts with 0, but layer start with 3.
+        const element = this.viewerRef2.current.element;
+        cornerstone.getLayers(element)[3 + pixelData].options.opacity =
+          0 === cornerstone.getLayers(element)[3 + pixelData].options.opacity ? 0.3 : 0;
+        cornerstone.updateImage(element);
+      //
         const newScore = state.score.slice();
-        newScore[index] = !newScore[index];
+        newScore[pixelData] = !newScore[pixelData];
         return {score: newScore};
       }, () => {
           let score = 10;

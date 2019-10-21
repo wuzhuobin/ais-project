@@ -48,10 +48,6 @@ export default class PickAisTool extends BaseTool {
       if (pixelData === 0) {
         return;
       }
-      // hard code style change opacity.
-      cornerstone.getLayers(element)[2 + pixelData].options.opacity = 
-        0 === cornerstone.getLayers(element)[2 + pixelData].options.opacity ? 0.3: 0;
-      cornerstone.updateImage(element);
       toggleScore(pixelData - 1)
     });
   }
